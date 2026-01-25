@@ -28,7 +28,15 @@ Version Control Platform Website
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Glue module for showing VCP data in partner website.
+This module extends the functionality of ``website_partner`` module,
+when ``vcp`` module is installed.
+
+It adds on partner website form view, some indicators regarding
+contributions.
+
+|website_partner_form|
+
+.. |website_partner_form| image:: https://raw.githubusercontent.com/OCA/version-control-platform/18.0/vcp_website/static/description/website_partner_form.png
 
 **Table of contents**
 
