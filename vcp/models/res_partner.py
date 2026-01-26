@@ -58,9 +58,3 @@ class ResPartner(models.Model):
             partner.update(
                 {key: data[partner.id].get(field_map[key], 0) for key in field_map}
             )
-
-    def _get_contributor_url(self):
-        return False
-
-    def _get_contributors_name(self, kind, **kwargs):
-        return self.name

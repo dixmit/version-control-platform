@@ -11,7 +11,10 @@ class VcpReview(models.Model):
     external_id = fields.Char(readonly=True, required=True, index=True)
     body = fields.Html(readonly=True)
     state = fields.Char(readonly=True)
-    partner_id = fields.Many2one("res.partner", readonly=True)
+    user_id = fields.Many2one("vcp.user", readonly=True)
+    partner_id = fields.Many2one(
+        related="user_id.partner_id",
+    )
     submitted_at = fields.Datetime(readonly=True)
     repository_id = fields.Many2one(
         related="request_id.repository_id",

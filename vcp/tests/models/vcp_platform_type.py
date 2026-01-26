@@ -7,8 +7,8 @@ from odoo import fields, models
 _logger = logging.getLogger(__name__)
 
 
-class VCPPlatform(models.Model):
-    _inherit = "vcp.platform"
+class VCPPlatformType(models.Model):
+    _inherit = "vcp.platform.type"
 
     kind = fields.Selection(
         selection_add=[("dummy", "Dummy Value")],

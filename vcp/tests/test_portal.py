@@ -19,10 +19,15 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
         # Load fake order model
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
-        from .models.vcp_platform import VCPPlatform
+        from .models.vcp_platform_type import VCPPlatformType
 
-        cls.loader.update_registry((VCPPlatform,))
-
+        cls.loader.update_registry((VCPPlatformType,))
+        cls.kind = cls.env["vcp.platform.type"].create(
+            {
+                "name": "Dummy Platform",
+                "kind": "dummy",
+            }
+        )
         # be sure some expected values are set otherwise homepage may fail
         date = Date.today()
         date = date - timedelta(days=date.day)
@@ -41,7 +46,7 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
                 "name": "oca",
                 "short_description": "OCA",
                 "description": "OCA",
-                "kind": "dummy",
+                "platform_type_id": cls.kind.id,
             }
         )
         repository = cls.env["vcp.repository"].create(
@@ -52,29 +57,39 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
                 "from_date": date,
             }
         )
-        user_01 = cls.env["res.partner"].create(
+        user_01 = cls.env["vcp.user"].create(
             {
                 "name": "Enric Tobella",
+                "external_id": "etobella",
+                "platform_type_id": cls.kind.id,
             }
         )
-        user_02 = cls.env["res.partner"].create(
+        user_02 = cls.env["vcp.user"].create(
             {
                 "name": "Luis Rodriguez",
+                "external_id": "lrodriguez",
+                "platform_type_id": cls.kind.id,
             }
         )
-        user_03 = cls.env["res.partner"].create(
+        user_03 = cls.env["vcp.user"].create(
             {
                 "name": "Jordi Ballester",
+                "external_id": "jballester",
+                "platform_type_id": cls.kind.id,
             }
         )
-        org_01 = cls.env["res.partner"].create(
+        org_01 = cls.env["vcp.organization"].create(
             {
                 "name": "Dixmit",
+                "external_id": "dixmit",
+                "platform_type_id": cls.kind.id,
             }
         )
-        org_02 = cls.env["res.partner"].create(
+        org_02 = cls.env["vcp.organization"].create(
             {
                 "name": "ForgeFlow",
+                "external_id": "forgeflow",
+                "platform_type_id": cls.kind.id,
             }
         )
         pull_request_01 = cls.env["vcp.request"].create(

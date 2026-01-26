@@ -50,7 +50,7 @@ class ContributorsController(CustomerPortal):
 
     def _get_field(self, kind):
         if kind == "contributors":
-            return "partner_id"
+            return "user_id"
         elif kind == "organizations":
             return "organization_id"
         elif kind == "repositories":
@@ -171,11 +171,11 @@ class ContributorsController(CustomerPortal):
     def _improve_vcp_data(self, data, kind, **kwargs):
         for key, values in data.items():
             if kind == "contributors":
-                partner = request.env["res.partner"].browse(key)
+                partner = request.env["vcp.user"].browse(key)
                 values["name"] = partner._get_contributors_name(kind, **kwargs)
                 values["url"] = partner._get_contributor_url()
             elif kind == "organizations":
-                organization = request.env["res.partner"].browse(key)
+                organization = request.env["vcp.organization"].browse(key)
                 values["name"] = organization._get_contributors_name(kind, **kwargs)
                 values["url"] = organization._get_contributor_url()
             elif kind == "repositories":

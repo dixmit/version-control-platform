@@ -10,10 +10,13 @@ class VcpRequest(models.Model):
 
     external_id = fields.Char(string="Externa ID", readonly=True, index=True)
     name = fields.Char(readonly=True)
-    partner_id = fields.Many2one(
-        comodel_name="res.partner",
+    user_id = fields.Many2one(
+        comodel_name="vcp.user",
         string="Contributor",
         readonly=True,
+    )
+    partner_id = fields.Many2one(
+        related="user_id.partner_id",
     )
     repository_id = fields.Many2one(
         comodel_name="vcp.repository",
@@ -26,7 +29,7 @@ class VcpRequest(models.Model):
         ondelete="restrict",
     )
     organization_id = fields.Many2one(
-        comodel_name="res.partner",
+        comodel_name="vcp.organization",
         readonly=True,
     )
     url = fields.Char(readonly=True)

@@ -42,7 +42,11 @@ class VCPPlatform(models.Model):
     image_64 = fields.Image(
         max_width=64, max_height=64, store=True, related="image_1920", string="Image 64"
     )
-    kind = fields.Selection([], required=True)
+    platform_type_id = fields.Many2one(
+        "vcp.platform.type",
+        required=True,
+    )
+    kind = fields.Selection(related="platform_type_id.kind")
     key_ids = fields.One2many(
         comodel_name="vcp.platform.key",
         inverse_name="platform_id",
@@ -153,15 +157,13 @@ class VCPPlatform(models.Model):
                 self._get_created_domain(start, end, **values)
                 + extra_domain
                 + [(field, "!=", False)],
-                [field, "partner_id:count_distinct"]
-                if field != "partner_id"
-                else [field],
+                [field, "user_id:count_distinct"] if field != "user_id" else [field],
                 [field],
             )
         ):
             data[pr[field][0]]["created_requests"] = pr[f"{field}_count"]
-            if field != "partner_id":
-                data[pr[field][0]]["developers"] = pr["partner_id"]
+            if field != "user_id":
+                data[pr[field][0]]["developers"] = pr["user_id"]
         for comment in (
             self.env["vcp.comment"]
             .sudo()

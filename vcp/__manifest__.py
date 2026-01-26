@@ -20,6 +20,9 @@
         "views/vcp_repository.xml",
         "views/vcp_branch.xml",
         "views/vcp_platform.xml",
+        "views/vcp_organization.xml",
+        "views/vcp_user.xml",
+        "views/vcp_platform_type.xml",
     ],
     "demo": [],
     "assets": {
