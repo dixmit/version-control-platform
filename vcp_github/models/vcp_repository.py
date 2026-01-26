@@ -35,11 +35,11 @@ class VcpRepository(models.Model):
         return (
             str(pr.id),
             {
-                "partner_id": self.env["res.partner"]._get_github_user(pr.user, client),
+                "user_id": self.platform_id.platform_type_id._get_user(pr.user.login),
                 "repository_id": self.id,
                 "branch_id": self.platform_id._get_branch(pr.base.ref),
-                "organization_id": self.env["res.partner"]._get_github_organization(
-                    pr.head.repo[0], client
+                "organization_id": self.platform_id.platform_type_id._get_organization(
+                    pr.head.repo[0]
                 ),
                 "url": pr.html_url,
                 "state": pr.state,
@@ -72,9 +72,9 @@ class VcpRepository(models.Model):
             [
                 {
                     "id": str(c["id"]),
-                    "partner_id": c.get("user")
-                    and self.env["res.partner"]._get_github_user(
-                        c["user"].get("login"), client
+                    "user_id": c.get("user")
+                    and self.platform_id.platform_type_id._get_user(
+                        c["user"].get("login")
                     ),
                     "body": c["body"],
                     "created_at": self.platform_id._parse_github_date(c["created_at"]),
@@ -85,9 +85,9 @@ class VcpRepository(models.Model):
             [
                 {
                     "id": str(r["id"]),
-                    "partner_id": r.get("user")
-                    and self.env["res.partner"]._get_github_user(
-                        r["user"].get("login"), client
+                    "user_id": r.get("user")
+                    and self.platform_id.platform_type_id._get_user(
+                        r["user"].get("login")
                     ),
                     "body": r["body"],
                     "submitted_at": self.platform_id._parse_github_date(

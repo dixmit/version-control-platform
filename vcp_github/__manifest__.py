@@ -14,6 +14,8 @@
     "external_dependencies": {
         "python": ["github3.py"],
     },
-    "data": [],
+    "data": [
+        "data/data.xml",
+    ],
     "demo": [],
 }

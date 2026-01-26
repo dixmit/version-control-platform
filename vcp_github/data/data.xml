@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="vcp_github_data_platform_type" model="vcp.platform.type">
+        <field name="name">GitHub</field>
+        <field name="kind">github</field>
+    </record>
+</odoo>
