@@ -55,6 +55,7 @@
                     <group>
                         <field name="name" />
                         <field name="description" />
+                        <field name="information_update" />
                         <field name="from_date" />
                     </group>
                 </sheet>

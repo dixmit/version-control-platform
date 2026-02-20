@@ -25,7 +25,20 @@ class VcpRepository(models.Model):
     from_date = fields.Datetime(readonly=True, required=True)
     request_ids = fields.One2many("vcp.request", inverse_name="repository_id")
     request_count = fields.Integer(compute="_compute_request_count")
+    test_field = fields.Char()  # TODO remove after testing
     active = fields.Boolean(default=True)
+    information_update = fields.Boolean(
+        compute="_compute_information_update",
+        store=True,
+        readonly=False,
+    )
+
+    @api.depends("platform_id")
+    def _compute_information_update(self):
+        for record in self:
+            record.information_update = (
+                record.platform_id.default_update_repository_information
+            )
 
     @api.depends("request_ids")
     def _compute_request_count(self):
@@ -42,7 +55,9 @@ class VcpRepository(models.Model):
         )
 
     def _cron_update_repositories(self, limit=1):
-        repositories = self.search([], limit=limit, order="from_date ASC")
+        repositories = self.search(
+            [("information_update", "=", True)], limit=limit, order="from_date ASC"
+        )
         for repository in repositories:
             repository.update_information()
 

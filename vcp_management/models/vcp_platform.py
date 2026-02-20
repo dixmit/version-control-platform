@@ -56,6 +56,8 @@ class VCPPlatform(models.Model):
         "vcp.repository",
         inverse_name="platform_id",
     )
+    default_update_repository_information = fields.Boolean()
+    information_update = fields.Boolean()
 
     def update_information(self):
         self.ensure_one()
@@ -63,13 +65,11 @@ class VCPPlatform(models.Model):
         self.last_update = fields.Datetime.now()
 
     def _cron_update_platforms(self):
-        for organization in self.search([]):
+        for platform in self.search([("information_update", "=", True)]):
             try:
-                organization.update_information()
+                platform.update_information()
             except Exception as e:
-                _logger.error(
-                    "Error updating organization %s: %s", organization.name, str(e)
-                )
+                _logger.error("Error updating platform %s: %s", platform.name, str(e))
 
     @tools.ormcache("self.id", "name")
     def _get_branch(self, name):
