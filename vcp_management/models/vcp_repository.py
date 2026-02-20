@@ -33,6 +33,10 @@ class VcpRepository(models.Model):
         readonly=False,
     )
 
+    def _get_git_url(self):
+        self.ensure_one()
+        return self.platform_id._get_git_url(self)
+
     @api.depends("platform_id")
     def _compute_information_update(self):
         for record in self:

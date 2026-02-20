@@ -64,6 +64,9 @@ class VCPPlatform(models.Model):
         getattr(self, f"_update_information_{self.kind}")()
         self.last_update = fields.Datetime.now()
 
+    def _get_git_url(self, repository):
+        return getattr(self, f"_get_git_url_{self.kind}")(repository)
+
     def _cron_update_platforms(self):
         for platform in self.search([("information_update", "=", True)]):
             try:
