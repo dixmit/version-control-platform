@@ -10,6 +10,7 @@
     "website": "https://github.com/OCA/version-control-platform",
     "depends": ["base"],
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "data/ir_cron.xml",
         "templates/templates.xml",
