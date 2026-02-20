@@ -5,11 +5,18 @@ from odoo import fields, models, tools
 
 
 class VcpHost(models.Model):
+    """
+    Source of origin of our platform,
+    e.g. GitHub, GitLab, My Own Gitlab instance, etc.
+    """
+
     _name = "vcp.host"
-    _description = "Vcp Platform Type"  # TODO
+    _description = "VCP Host"
 
     name = fields.Char(required=True)
-    kind = fields.Selection([], required=True)
+    type_id = fields.Many2one(
+        "vcp.host.type",
+    )
     active = fields.Boolean(default=True)
 
     @tools.ormcache("self.id", "username")

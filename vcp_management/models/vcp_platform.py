@@ -46,7 +46,7 @@ class VCPPlatform(models.Model):
         "vcp.host",
         required=True,
     )
-    kind = fields.Selection(related="host_id.kind")
+    kind = fields.Char(related="host_id.type_id.code")
     key_ids = fields.One2many(
         comodel_name="vcp.platform.key",
         inverse_name="platform_id",

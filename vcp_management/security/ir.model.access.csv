@@ -9,10 +9,12 @@ access_request,Access Pull Requests,model_vcp_request,base.group_user,1,0,0,0
 access_request_label,Access Pull Requests Labels,model_vcp_request_label,base.group_user,1,0,0,0
 access_review,Access Reviews,model_vcp_review,base.group_user,1,0,0,0
 access_comment,Access Comments,model_vcp_comment,base.group_user,1,0,0,0
-access_vcp_host,Access Comments,model_vcp_host,base.group_user,1,0,0,0
-manage_vcp_host,Access Comments,model_vcp_host,base.group_system,1,1,1,1
-access_vcp_host_portal,Access Platform from Portal,model_vcp_host,base.group_portal,1,0,0,0
-access_user,Access Comments,model_vcp_user,base.group_user,1,0,0,0
-manage_user,Access Comments,model_vcp_user,base.group_system,1,1,1,1
-access_organization,Access Comments,model_vcp_organization,base.group_user,1,0,0,0
-manage_organization,Access Comments,model_vcp_organization,base.group_system,1,1,1,1
+access_vcp_host_type,Access Host Type,model_vcp_host_type,base.group_user,1,0,0,0
+access_vcp_host_type_portal,Access Host Type for Portal,model_vcp_host_type,base.group_portal,1,0,0,0
+access_vcp_host,Access Hosts,model_vcp_host,base.group_user,1,0,0,0
+manage_vcp_host,Nabage Hosts,model_vcp_host,base.group_system,1,1,1,1
+access_vcp_host_portal,Access Hosts from Portal,model_vcp_host,base.group_portal,1,0,0,0
+access_user,Access Users,model_vcp_user,base.group_user,1,0,0,0
+manage_user,Manage Users,model_vcp_user,base.group_system,1,1,1,1
+access_organization,Access Organizations,model_vcp_organization,base.group_user,1,0,0,0
+manage_organization,Manage Organizations,model_vcp_organization,base.group_system,1,1,1,1

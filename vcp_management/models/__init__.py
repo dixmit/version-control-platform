@@ -6,5 +6,6 @@ from . import vcp_review
 from . import vcp_comment
 from . import res_partner
 from . import vcp_host
+from . import vcp_host_type
 from . import vcp_user
 from . import vcp_organization
