@@ -19,6 +19,8 @@ class TestGithub(TransactionCase):
                 "key_ids": [
                     Command.create({"name": "ghp_exampletoken1234567890abcdef"})
                 ],
+                "default_update_repository_information": True,
+                "update_information": True,
             }
         )
 
