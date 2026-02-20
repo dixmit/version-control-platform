@@ -11,7 +11,7 @@
                     <group>
                         <field name="name" />
                         <field name="external_id" />
-                        <field name="platform_type_id" />
+                        <field name="host_id" />
                         <field name="partner_id" />
                     </group>
                 </sheet>

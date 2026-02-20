@@ -4,8 +4,8 @@
 from odoo import fields, models, tools
 
 
-class VcpPlatformType(models.Model):
-    _name = "vcp.platform.type"
+class VcpHost(models.Model):
+    _name = "vcp.host"
     _description = "Vcp Platform Type"  # TODO
 
     name = fields.Char(required=True)
@@ -24,7 +24,7 @@ class VcpPlatformType(models.Model):
                 {
                     "name": username,
                     "external_id": username,
-                    "platform_type_id": self.id,
+                    "host_id": self.id,
                 }
             )
         return user.id
@@ -41,7 +41,7 @@ class VcpPlatformType(models.Model):
                 {
                     "name": organization,
                     "external_id": organization,
-                    "platform_type_id": self.id,
+                    "host_id": self.id,
                 }
             )
         return org.id

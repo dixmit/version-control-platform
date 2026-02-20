@@ -42,11 +42,11 @@ class VCPPlatform(models.Model):
     image_64 = fields.Image(
         max_width=64, max_height=64, store=True, related="image_1920", string="Image 64"
     )
-    platform_type_id = fields.Many2one(
-        "vcp.platform.type",
+    host_id = fields.Many2one(
+        "vcp.host",
         required=True,
     )
-    kind = fields.Selection(related="platform_type_id.kind")
+    kind = fields.Selection(related="host_id.kind")
     key_ids = fields.One2many(
         comodel_name="vcp.platform.key",
         inverse_name="platform_id",

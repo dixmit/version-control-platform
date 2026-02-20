@@ -4,14 +4,14 @@
 from odoo import fields, models
 
 
-class VcpOrganization(models.Model):
-    _name = "vcp.organization"
-    _description = "Organization"  # TODO
+class VcpUser(models.Model):
+    _name = "vcp.user"
+    _description = "User"
 
     name = fields.Char(required=True, readonly=True)
     external_id = fields.Char(required=True, readonly=True, index=True)
-    platform_type_id = fields.Many2one(
-        comodel_name="vcp.platform.type",
+    host_id = fields.Many2one(
+        comodel_name="vcp.host",
         required=True,
         readonly=True,
     )
@@ -22,7 +22,7 @@ class VcpOrganization(models.Model):
     _sql_constraints = [
         (
             "external_id_uniq",
-            "unique(external_id, platform_type_id)",
+            "unique(external_id, host_id)",
             "External ID must be unique.",
         )
     ]

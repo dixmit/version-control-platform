@@ -24,7 +24,7 @@
                     />
                     <group>
                         <field name="name" />
-                        <field name="platform_type_id" />
+                        <field name="host_id" />
                         <field name="short_description" />
                         <field name="description" />
                         <field name="update_interval_days" />
