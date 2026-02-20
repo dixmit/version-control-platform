@@ -5,6 +5,14 @@ from odoo import fields, models
 
 
 class VcpUser(models.Model):
+    """
+    Users from the host that relates to our platform.
+    For example, if we manage GitHub repositories, these are GitHub users.
+    In GitLab, these are GitLab users.
+
+    They could be related to partners.
+    """
+
     _name = "vcp.user"
     _description = "User"
 

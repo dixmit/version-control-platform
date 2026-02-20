@@ -5,6 +5,11 @@ from odoo import fields, models, tools
 
 
 class VcpRequest(models.Model):
+    """
+    Request of changes on a repository, e.g. pull request on GitHub
+    or merge request on GitLab.
+    """
+
     _name = "vcp.request"
     _description = "Code Request"
 

@@ -5,8 +5,18 @@ from odoo import fields, models
 
 
 class VcpOrganization(models.Model):
+    """
+    An organization on a platform, e.g. a GitHub organization or GitLab group.
+    It is not the organization that we manage, it represents organization that relates
+    somehow with our platform.
+    For example, if we manage GitHub repositories, these are GitHub organizations.
+    In GitLab, these are GitLab groups.
+
+    They can be related to partners.
+    """
+
     _name = "vcp.organization"
-    _description = "Organization"  # TODO
+    _description = "Organization"
 
     name = fields.Char(required=True, readonly=True)
     external_id = fields.Char(required=True, readonly=True, index=True)

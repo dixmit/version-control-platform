@@ -5,6 +5,10 @@ from odoo import api, fields, models
 
 
 class VcpRepository(models.Model):
+    """
+    Repository of code
+    """
+
     _name = "vcp.repository"
     _description = "Repository"
 

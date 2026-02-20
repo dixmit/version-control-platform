@@ -5,6 +5,11 @@ from odoo import fields, models
 
 
 class VcpReview(models.Model):
+    """
+    Reviews of a request, e.g. pull request review on GitHub or
+    merge request review on GitLab.
+    """
+
     _name = "vcp.review"
     _description = "Review"  # TODO
 
