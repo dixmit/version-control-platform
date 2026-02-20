@@ -15,7 +15,7 @@ class TestGithub(TransactionCase):
         cls.platform = cls.env["vcp.platform"].create(
             {
                 "name": "oca",
-                "host_id": cls.env.ref("vcp_github.vcp_github_data_host").id,
+                "host_id": cls.env.ref("vcp_github.vcp_github_host").id,
                 "key_ids": [
                     Command.create({"name": "ghp_exampletoken1234567890abcdef"})
                 ],

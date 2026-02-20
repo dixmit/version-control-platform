@@ -10,6 +10,6 @@ class VcpUser(models.Model):
 
     def _get_contributor_url(self):
         result = super()._get_contributor_url()
-        if not result and self.host_id.kind == "github":
+        if not result and self.host_id.type_id.code == "github":
             return f"https://github.com/{self.external_id}"
         return result
