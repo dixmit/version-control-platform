@@ -3,8 +3,6 @@
 
 from datetime import timedelta
 
-from odoo_test_helper import FakeModelLoader
-
 from odoo.fields import Date
 from odoo.tests import tagged
 
@@ -16,16 +14,16 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Load fake order model
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
-        from .models.vcp_host import VcpHost
-
-        cls.loader.update_registry((VcpHost,))
-        cls.kind = cls.env["vcp.host"].create(
+        cls.host_type = cls.env["vcp.host.type"].create(
+            {
+                "name": "Dummy",
+                "code": "dummy",
+            }
+        )
+        cls.host = cls.env["vcp.host"].create(
             {
                 "name": "Dummy Platform",
-                "kind": "dummy",
+                "type_id": cls.host_type.id,
             }
         )
         # be sure some expected values are set otherwise homepage may fail
@@ -46,7 +44,7 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
                 "name": "oca",
                 "short_description": "OCA",
                 "description": "OCA",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         repository = cls.env["vcp.repository"].create(
@@ -61,35 +59,35 @@ class TestUi(HttpCaseWithUserDemo, HttpCaseWithUserPortal):
             {
                 "name": "Enric Tobella",
                 "external_id": "etobella",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         user_02 = cls.env["vcp.user"].create(
             {
                 "name": "Luis Rodriguez",
                 "external_id": "lrodriguez",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         user_03 = cls.env["vcp.user"].create(
             {
                 "name": "Jordi Ballester",
                 "external_id": "jballester",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         org_01 = cls.env["vcp.organization"].create(
             {
                 "name": "Dixmit",
                 "external_id": "dixmit",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         org_02 = cls.env["vcp.organization"].create(
             {
                 "name": "ForgeFlow",
                 "external_id": "forgeflow",
-                "host_id": cls.kind.id,
+                "host_id": cls.host.id,
             }
         )
         pull_request_01 = cls.env["vcp.request"].create(
