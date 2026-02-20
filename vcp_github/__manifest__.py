@@ -9,7 +9,7 @@
     "author": "Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/version-control-platform",
     "depends": [
-        "vcp",
+        "vcp_management",
     ],
     "external_dependencies": {
         "python": ["github3.py"],

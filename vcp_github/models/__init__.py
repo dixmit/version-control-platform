@@ -1,4 +1,4 @@
-from . import vcp_platform_type
+from . import vcp_host
 from . import vcp_platform
 from . import vcp_repository
 from . import vcp_user

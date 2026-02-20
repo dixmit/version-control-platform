@@ -35,10 +35,10 @@ class VcpRepository(models.Model):
         return (
             str(pr.id),
             {
-                "user_id": self.platform_id.platform_type_id._get_user(pr.user.login),
+                "user_id": self.platform_id.host_id._get_user(pr.user.login),
                 "repository_id": self.id,
                 "branch_id": self.platform_id._get_branch(pr.base.ref),
-                "organization_id": self.platform_id.platform_type_id._get_organization(
+                "organization_id": self.platform_id.host_id._get_organization(
                     pr.head.repo[0]
                 ),
                 "url": pr.html_url,
@@ -73,9 +73,7 @@ class VcpRepository(models.Model):
                 {
                     "id": str(c["id"]),
                     "user_id": c.get("user")
-                    and self.platform_id.platform_type_id._get_user(
-                        c["user"].get("login")
-                    ),
+                    and self.platform_id.host_id._get_user(c["user"].get("login")),
                     "body": c["body"],
                     "created_at": self.platform_id._parse_github_date(c["created_at"]),
                     "updated_at": self.platform_id._parse_github_date(c["updated_at"]),
@@ -86,9 +84,7 @@ class VcpRepository(models.Model):
                 {
                     "id": str(r["id"]),
                     "user_id": r.get("user")
-                    and self.platform_id.platform_type_id._get_user(
-                        r["user"].get("login")
-                    ),
+                    and self.platform_id.host_id._get_user(r["user"].get("login")),
                     "body": r["body"],
                     "submitted_at": self.platform_id._parse_github_date(
                         r.get("submitted_at")

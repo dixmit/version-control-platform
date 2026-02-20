@@ -5,8 +5,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class VcpPlatformType(models.Model):
-    _inherit = "vcp.platform.type"
+class VcpHost(models.Model):
+    _inherit = "vcp.host"
 
     kind = fields.Selection(
         selection_add=[("github", "GitHub")],
@@ -17,7 +17,7 @@ class VcpPlatformType(models.Model):
     def _check_kind_github(self):
         for record in self.filtered(lambda r: r.kind == "github"):
             platforms = self.env["vcp.platform"].search(
-                [("platform_type_id", "!=", record.id), ("kind", "=", "github")],
+                [("host_id", "!=", record.id), ("kind", "=", "github")],
                 limit=1,
             )
             if platforms:
