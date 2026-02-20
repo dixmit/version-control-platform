@@ -11,6 +11,7 @@
     "depends": ["vcp_management", "portal"],
     "data": [
         "templates/templates.xml",
+        "security/ir.model.access.csv",
     ],
     "demo": [],
     "assets": {
