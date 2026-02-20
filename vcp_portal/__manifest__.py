@@ -8,7 +8,7 @@
     "license": "AGPL-3",
     "author": "Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/version-control-platform",
-    "depends": ["vcp", "portal"],
+    "depends": ["vcp_management", "portal"],
     "data": [
         "templates/templates.xml",
     ],
