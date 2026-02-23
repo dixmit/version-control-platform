@@ -32,6 +32,36 @@ class VcpRepository(models.Model):
         store=True,
         readonly=False,
     )
+    branch_update = fields.Boolean(default=True)
+    branch_update_date = fields.Datetime(
+        readonly=True, required=True, default=fields.Datetime.now
+    )
+    local_path = fields.Char(compute="_compute_local_path")
+    rule_ids = fields.Many2many(
+        "vcp.rule",
+        string="Processing Rules",
+    )
+    override_parent_rules = fields.Boolean()
+    branch_ids = fields.One2many(
+        "vcp.repository.branch",
+        inverse_name="repository_id",
+    )
+
+    @api.depends("rule_ids", "platform_id.rule_ids", "override_parent_rules")
+    def _compute_has_rules(self):
+        for record in self:
+            record.has_rules = bool(record._get_rules())
+
+    def _get_rules(self):
+        rules = self.rule_ids
+        if not self.override_parent_rules:
+            rules |= self.platform_id.rule_ids
+        return rules
+
+    @api.depends("platform_id.local_path", "name")
+    def _compute_local_path(self):
+        for record in self:
+            record.local_path = f"{record.platform_id.local_path}/{record.name}"
 
     def _get_git_url(self):
         self.ensure_one()
@@ -49,6 +79,12 @@ class VcpRepository(models.Model):
         for record in self:
             record.request_count = len(record.request_ids)
 
+    def update_branches(self):
+        self.ensure_one()
+        now = fields.Datetime.now()
+        getattr(self, f"_update_branches_{self.platform_id.kind}")()
+        self.branch_update_date = now
+
     def force_update_information(self):
         self.update_information(update_interval_days=365)
 
@@ -64,6 +100,13 @@ class VcpRepository(models.Model):
         )
         for repository in repositories:
             repository.update_information()
+
+    def _cron_update_branches(self, limit=1):
+        repositories = self.search(
+            [("branch_update", "=", True)], limit=limit, order="branch_update_date ASC"
+        )
+        for repository in repositories:
+            repository.update_branches()
 
     def _get_repository_url(self):
         self.ensure_one()

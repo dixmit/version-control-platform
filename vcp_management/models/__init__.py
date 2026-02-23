@@ -1,6 +1,7 @@
 from . import vcp_platform
 from . import vcp_branch
 from . import vcp_repository
+from . import vcp_repository_branch
 from . import vcp_request
 from . import vcp_review
 from . import vcp_comment
@@ -9,3 +10,4 @@ from . import vcp_host
 from . import vcp_host_type
 from . import vcp_user
 from . import vcp_organization
+from . import vcp_rule

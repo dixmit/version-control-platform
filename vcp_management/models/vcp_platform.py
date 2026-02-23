@@ -1,12 +1,13 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
+import os
 from collections import defaultdict
 from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, fields, models, tools
+from odoo import _, api, fields, models, tools
 
 _logger = logging.getLogger(__name__)
 
@@ -14,7 +15,7 @@ _logger = logging.getLogger(__name__)
 class VCPPlatform(models.Model):
     """
     This model should define how to interact with a Version Control Platform
-    (VCP) such as GitHub, GitLab, etc.
+    (VCP) such as GitHub, GitLab, etc._get_git_url
     1 platform should correspond to 1 organization/account on the VCP.
     """
 
@@ -58,6 +59,22 @@ class VCPPlatform(models.Model):
     )
     default_update_repository_information = fields.Boolean()
     information_update = fields.Boolean()
+    local_path = fields.Char(compute="_compute_local_path")
+    rule_ids = fields.Many2many(
+        "vcp.rule",
+        string="Processing Rules",
+    )
+
+    def _get_source_path(self):
+        return tools.config.get("source_code_local_path", "") or os.environ.get(
+            "SOURCE_CODE_LOCAL_PATH", ""
+        )
+
+    @api.depends()
+    def _compute_local_path(self):
+        source_path = self._get_source_path()
+        for record in self:
+            record.local_path = f"{source_path}/{record.id}"
 
     def update_information(self):
         self.ensure_one()

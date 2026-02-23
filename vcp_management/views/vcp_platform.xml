@@ -30,6 +30,7 @@
                         <field name="update_interval_days" />
                         <field name="information_update" />
                         <field name="default_update_repository_information" />
+                        <field name="rule_ids" widget="many2many_tags" />
                     </group>
                     <notebook>
                         <page string="Branches" name="branch">
