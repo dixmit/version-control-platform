@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="vcp_odoo_module_version_form_view">
+        <field name="model">vcp.odoo.module.version</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <group>
+                        <field name="module_id" />
+                        <field name="version" />
+                        <field name="depends_on_module_ids" widget="many2many_tags" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="vcp_odoo_module_version_search_view">
+        <field name="model">vcp.odoo.module.version</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="module_id" />
+                <field name="version" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="vcp_odoo_module_version_tree_view">
+        <field name="model">vcp.odoo.module.version</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="module_id" />
+                <field name="version" />
+                <field name="depends_on_module_ids" widget="many2many_tags" />
+            </list>
+        </field>
+    </record>
+</odoo>
