@@ -27,4 +27,10 @@
         "views/vcp_host.xml",
     ],
     "demo": [],
+    "external_dependencies": {
+        "python": ["GitPython", "pathspec"],
+        "bin": ["cloc"],
+        # special definition used by OCA to install packages
+        "deb": ["cloc"],
+    },
 }
