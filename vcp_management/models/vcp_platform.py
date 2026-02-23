@@ -12,7 +12,7 @@ from odoo import _, api, fields, models, tools
 _logger = logging.getLogger(__name__)
 
 
-class VCPPlatform(models.Model):
+class VcpPlatform(models.Model):
     """
     This model should define how to interact with a Version Control Platform
     (VCP) such as GitHub, GitLab, etc._get_git_url
@@ -66,8 +66,12 @@ class VCPPlatform(models.Model):
     )
 
     def _get_source_path(self):
-        return tools.config.get("source_code_local_path", "") or os.environ.get(
-            "SOURCE_CODE_LOCAL_PATH", ""
+        return (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("vcp_management.source_code_local_path", "")
+            or tools.config.get("source_code_local_path", "")
+            or os.environ.get("SOURCE_CODE_LOCAL_PATH", "")
         )
 
     @api.depends()
@@ -90,6 +94,7 @@ class VCPPlatform(models.Model):
                 platform.update_information()
             except Exception as e:
                 _logger.error("Error updating platform %s: %s", platform.name, str(e))
+                raise e
 
     @tools.ormcache("self.id", "name")
     def _get_branch(self, name):

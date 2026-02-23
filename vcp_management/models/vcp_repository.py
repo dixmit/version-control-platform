@@ -47,11 +47,6 @@ class VcpRepository(models.Model):
         inverse_name="repository_id",
     )
 
-    @api.depends("rule_ids", "platform_id.rule_ids", "override_parent_rules")
-    def _compute_has_rules(self):
-        for record in self:
-            record.has_rules = bool(record._get_rules())
-
     def _get_rules(self):
         rules = self.rule_ids
         if not self.override_parent_rules:

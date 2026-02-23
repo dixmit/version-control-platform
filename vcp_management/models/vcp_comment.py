@@ -23,6 +23,10 @@ class VcpComment(models.Model):
         readonly=True,
         store=True,
     )
+    partner_organization_id = fields.Many2one(
+        related="request_id.organization_id.partner_id",
+        string="Organization Partner",
+    )
     repository_id = fields.Many2one(
         related="request_id.repository_id",
         readonly=True,

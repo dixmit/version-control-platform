@@ -40,6 +40,10 @@ class VcpReview(models.Model):
         readonly=True,
         store=True,
     )
+    partner_organization_id = fields.Many2one(
+        related="request_id.organization_id.partner_id",
+        string="Organization Partner",
+    )
 
     _sql_constraints = [
         ("external_id_uniq", "unique(external_id)", "External ID must be unique.")

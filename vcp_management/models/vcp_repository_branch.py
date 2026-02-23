@@ -58,7 +58,7 @@ class VcpRepositoryBranch(models.Model):
     def _get_rules(self):
         rules = self.rule_ids
         if not self.override_parent_rules:
-            rules |= self.repository_id.rule_ids
+            rules |= self.repository_id._get_rules()
         return rules
 
     @api.depends("repository_id.local_path", "branch_id.name")

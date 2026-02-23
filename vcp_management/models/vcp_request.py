@@ -37,6 +37,10 @@ class VcpRequest(models.Model):
         comodel_name="vcp.organization",
         readonly=True,
     )
+    partner_organization_id = fields.Many2one(
+        related="organization_id.partner_id",
+        string="Organization Partner",
+    )
     url = fields.Char(readonly=True)
     state = fields.Char(readonly=True)
     is_merged = fields.Boolean(readonly=True)
