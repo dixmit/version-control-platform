@@ -110,6 +110,7 @@
             <list default_order="from_date asc">
                 <field name="name" />
                 <field name="description" />
+                <field name="platform_id" />
                 <field name="from_date" />
                 <field name="fork_count" />
             </list>

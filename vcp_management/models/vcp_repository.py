@@ -32,7 +32,7 @@ class VcpRepository(models.Model):
         store=True,
         readonly=False,
     )
-    branch_update = fields.Boolean(default=True)
+    branch_update = fields.Boolean(default=False)
     branch_update_date = fields.Datetime(
         readonly=True, required=True, default=fields.Datetime.now
     )
