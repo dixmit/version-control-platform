@@ -1,13 +1,14 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import fields, models, tools
 
 
 class VcpOdooModuleVersion(models.Model):
     _name = "vcp.odoo.module.version"
-    _description = "Odoo Module Version"  # TODO
+    _description = "Odoo Module on an specific repository branch"
 
+    name = fields.Char(required=True)
     module_id = fields.Many2one(
         "vcp.odoo.module",
         required=True,
@@ -20,3 +21,45 @@ class VcpOdooModuleVersion(models.Model):
     depends_on_module_ids = fields.Many2many(
         "vcp.odoo.module",
     )
+    auto_install = fields.Boolean()
+    license = fields.Char(string="License (Manifest)", readonly=True)
+    summary = fields.Char(string="Summary (Manifest)", readonly=True)
+    website = fields.Char(string="Website (Manifest)", readonly=True)
+    image_1920 = fields.Image(max_width=1920, max_height=1920, readonly=True)
+    image_128 = fields.Image(
+        related="image_1920", readonly=True, max_width=128, max_height=128
+    )
+    lib_python_ids = fields.Many2many(
+        "vcp.odoo.lib.python",
+        string="Python Libraries",
+    )
+    bin_package_ids = fields.Many2many(
+        "vcp.odoo.bin.package",
+        string="Python Binaries",
+    )
+
+
+class VcpOdooLibPython(models.Model):
+    _name = "vcp.odoo.lib.python"
+
+    name = fields.Char(required=True)
+
+    @tools.ormcache("name")
+    def _get_lib_python(self, name):
+        lib = self.search([("name", "=", name)], limit=1)
+        if not lib:
+            lib = self.create({"name": name})
+        return lib.id
+
+
+class VcpOdooBinPackage(models.Model):
+    _name = "vcp.odoo.bin.package"
+
+    name = fields.Char(required=True)
+
+    @tools.ormcache("name")
+    def _get_bin(self, name):
+        bin_src = self.search([("name", "=", name)], limit=1)
+        if not bin_src:
+            bin_src = self.create({"name": name})
+        return bin_src.id

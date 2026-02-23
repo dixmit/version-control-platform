@@ -1,8 +1,10 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import ast
+import base64
 import copy
 import logging
+import os
 
 from odoo import fields, models
 from odoo.fields import Command
@@ -52,6 +54,16 @@ class VcpRule(models.Model):
             manifest.update(ast.literal_eval(f.read()))
         return manifest
 
+    def _get_odoo_icon_path(self):
+        return [
+            "static/src/img/icon.svg",
+            "static/src/img/icon.jpg",
+            "static/src/img/icon.png",
+            "static/description/icon.svg",
+            "static/description/icon.jpg",
+            "static/description/icon.png",
+        ]
+
     def _process_rule_odoo_module_prepare_vals(
         self, repository_branch, module_id, manifest_path
     ):
@@ -59,11 +71,33 @@ class VcpRule(models.Model):
         depends = []
         for dependancy in manifest.get("depends", []):
             depends.append(self.env["vcp.odoo.module"]._get_odoo_module(dependancy))
+        icon = False
+        for icon_path in self._get_odoo_icon_path():
+            if os.path.exists(os.path.join(os.path.dirname(manifest_path), icon_path)):
+                with open(
+                    os.path.join(os.path.dirname(manifest_path), icon_path), "rb"
+                ) as f:
+                    icon = base64.b64encode(f.read())
+                break
+        python_libs = []
+        for lib in manifest.get("external_dependencies", {}).get("python", []):
+            python_libs.append(self.env["vcp.odoo.lib.python"]._get_lib_python(lib))
+        package_bins = []
+        for package_bin in manifest.get("external_dependencies", {}).get("bin", []):
+            package_bins.append(self.env["vcp.odoo.bin.package"]._get_bin(package_bin))
         return {
+            "name": manifest.get("name"),
             "module_id": module_id,
             "version": manifest.get(
                 "version", repository_branch.branch_id.name + ".0.0-dev"
             ),
+            "license": manifest.get("license"),
+            "summary": manifest.get("summary"),
+            "website": manifest.get("website"),
+            "auto_install": manifest.get("auto_install", False),
             "repository_branch_id": repository_branch.id,
             "depends_on_module_ids": [Command.set(depends)],
+            "image_1920": icon,
+            "lib_python_ids": [Command.set(python_libs)],
+            "bin_package_ids": [Command.set(package_bins)],
         }

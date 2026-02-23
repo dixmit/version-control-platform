@@ -8,11 +8,32 @@
             <form>
                 <header />
                 <sheet>
+                    <field
+                        name="image_1920"
+                        widget="image"
+                        class="oe_avatar"
+                        options="{'preview_image': 'image_128'}"
+                    />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
                     <group>
                         <field name="module_id" />
                         <field name="version" />
                         <field name="depends_on_module_ids" widget="many2many_tags" />
+                        <field name="auto_install" />
+                        <field name="license" />
+                        <field name="website" />
+                        <field name="lib_python_ids" widget="many2many_tags" />
+                        <field name="bin_package_ids" widget="many2many_tags" />
                     </group>
+                    <notebook>
+                        <page name="summary" string="Summary">
+                            <field name="summary" />
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
@@ -22,6 +43,7 @@
         <field name="model">vcp.odoo.module.version</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name" />
                 <field name="module_id" />
                 <field name="version" />
             </search>
@@ -32,6 +54,7 @@
         <field name="model">vcp.odoo.module.version</field>
         <field name="arch" type="xml">
             <list>
+                <field name="name" />
                 <field name="module_id" />
                 <field name="version" />
                 <field name="depends_on_module_ids" widget="many2many_tags" />
