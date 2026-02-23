@@ -10,7 +10,6 @@
     "website": "https://github.com/OCA/version-control-platform",
     "depends": ["base"],
     "data": [
-        "views/vcp_rule.xml",
         "security/security.xml",
         "security/ir.model.access.csv",
         "data/ir_cron.xml",
@@ -25,6 +24,7 @@
         "views/vcp_organization.xml",
         "views/vcp_user.xml",
         "views/vcp_host.xml",
+        "views/vcp_rule.xml",
     ],
     "demo": [],
     "external_dependencies": {
