@@ -15,11 +15,7 @@
                         <field name="branch_pattern" />
                     </group>
                     <notebook>
-                        <page
-                            string="Settings"
-                            name="cloc"
-                            inivisible="rule_type != 'cloc'"
-                        >
+                        <page string="Settings" name="settings">
                             <field name="paths" />
                         </page>
                     </notebook>

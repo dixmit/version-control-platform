@@ -92,6 +92,7 @@ class VcpRepositoryBranch(models.Model):
                 self.repository_id._get_git_url(),
                 local_path,
                 branch=self.branch_id.name,
+                depth=1,
             )
 
 
