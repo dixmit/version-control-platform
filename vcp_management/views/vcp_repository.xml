@@ -58,6 +58,12 @@
                             />
                         </button>
                     </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
                     <group>
                         <field name="name" />
                         <field name="description" />
@@ -101,6 +107,11 @@
             <search>
                 <field name="name" />
                 <field name="description" />
+                <filter
+                    name="filter_not_active"
+                    string="Archived"
+                    domain="[('active','=',False)]"
+                />
             </search>
         </field>
     </record>
@@ -108,7 +119,7 @@
     <record model="ir.ui.view" id="vcp_repository_tree_view">
         <field name="model">vcp.repository</field>
         <field name="arch" type="xml">
-            <list default_order="from_date asc">
+            <list default_order="from_date asc" decoration-muted="not active">
                 <field name="name" />
                 <field name="description" />
                 <field name="platform_id" />

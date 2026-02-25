@@ -30,7 +30,7 @@ class VcpRepository(models.Model):
     request_ids = fields.One2many("vcp.request", inverse_name="repository_id")
     request_count = fields.Integer(compute="_compute_request_count")
     test_field = fields.Char()  # TODO remove after testing
-    active = fields.Boolean(default=True)
+    active = fields.Boolean(default=True, readonly=True)
     information_update = fields.Boolean(
         compute="_compute_information_update",
         store=True,

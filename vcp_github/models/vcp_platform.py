@@ -42,6 +42,8 @@ class VcpPlatform(models.Model):
         for repo in repos:
             if repo.fork and not self.fetch_repository_fork:
                 continue
+            if repo.archived and not self.fetch_repository_archived:
+                continue
             self._update_github_repository(repo)
         self.last_update = fields.Datetime.now()
 
@@ -58,15 +60,20 @@ class VcpPlatform(models.Model):
             "stargazers_count": repo.stargazers_count,
             "fork_count": repo.forks_count,
             "is_fork": repo.fork,
+            "active": not repo.archived,
             "watchers_count": repo.watchers_count,
             "description": repo.description,
         }
-        repository = self.env["vcp.repository"].search(
-            [
-                ("name", "=", repo.name),
-                ("platform_id", "=", self.id),
-            ],
-            limit=1,
+        repository = (
+            self.env["vcp.repository"]
+            .with_context(active_test=False)
+            .search(
+                [
+                    ("name", "=", repo.name),
+                    ("platform_id", "=", self.id),
+                ],
+                limit=1,
+            )
         )
         if not repository:
             repository = (

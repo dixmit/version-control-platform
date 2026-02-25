@@ -29,6 +29,7 @@
                         <field name="description" />
                         <field name="update_interval_days" />
                         <field name="fetch_repository_fork" />
+                        <field name="fetch_repository_archived" />
                         <field name="information_update" />
                         <field name="default_update_repository_information" />
                         <field name="rule_ids" widget="many2many_tags" />
