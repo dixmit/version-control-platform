@@ -366,20 +366,3 @@ class VcpPlatform(models.Model):
                 values["name"] = repository.name
                 values["url"] = repository._get_repository_url()
         return data
-
-
-class VcpPlatformKey(models.Model):
-    _name = "vcp.platform.key"
-    _description = "VCP Platform API Key"  # TODO
-
-    platform_id = fields.Many2one(
-        comodel_name="vcp.platform",
-        string="Platform",
-        required=True,
-        ondelete="cascade",
-    )
-    name = fields.Char(required=True)
-
-    _sql_constraints = [
-        ("name_uniq", "unique(name, platform_id)", "API Key must be unique.")
-    ]

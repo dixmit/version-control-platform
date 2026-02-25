@@ -1,4 +1,5 @@
 from . import vcp_platform
+from . import vcp_platform_key
 from . import vcp_branch
 from . import vcp_rule
 from . import vcp_rule_information
