@@ -13,6 +13,7 @@
         "security/ir.model.access.csv",
         "views/vcp_odoo_module_version.xml",
         "views/vcp_odoo_module.xml",
+        "views/vcp_rule.xml",
         "data/vcp_rule.xml",
     ],
     "demo": [],

@@ -6,7 +6,7 @@ from odoo import fields, models, tools
 
 class VcpOdooModule(models.Model):
     _name = "vcp.odoo.module"
-    _description = "Odoo Module"  # TODO
+    _description = "Odoo Module"
 
     name = fields.Char(required=True)
     version_ids = fields.One2many("vcp.odoo.module.version", inverse_name="module_id")

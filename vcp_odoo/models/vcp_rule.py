@@ -20,33 +20,44 @@ class VcpRule(models.Model):
         selection_add=[("odoo_module", "Odoo Module Analysis")],
         ondelete={"odoo_module": "cascade"},
     )
+    odoo_module_rule_ids = fields.Many2many(
+        "vcp.rule",
+        "vcp_rule_odoo_module_rel",
+        "rule_id",
+        "odoo_module_rule_id",
+    )
 
-    def _process_rule_odoo_module(self, repository_branch):
+    def _process_rule_odoo_module(self, record):
         """
-        Process the rule as a cloc analysis.
+        Process the rule as an Odoo module analysis.
         """
-        repository_branch._download_code()
+        if record._name != "vcp.repository.branch":
+            # It doesn't make sense to process this kind of rules outside
+            # of a repository branch, as they need the code to be downloaded
+            # and analyzed.
+            return
+        record._download_code()
 
-        manifests = self._cloc_get_matches(repository_branch.local_path)
+        manifests = self._cloc_get_matches(record.local_path)
         for manifest in manifests:
-            path = repository_branch.local_path + "/" + manifest
-            _path, module_name, _manifest_name = path.rsplit("/", 2)
+            path = record.local_path + "/" + manifest
+            module_path, module_name, _manifest_name = path.rsplit("/", 2)
             module_id = self.env["vcp.odoo.module"]._get_odoo_module(module_name)
 
-            vals = self._process_rule_odoo_module_prepare_vals(
-                repository_branch, module_id, path
-            )
+            vals = self._process_rule_odoo_module_prepare_vals(record, module_id, path)
             module_version = self.env["vcp.odoo.module.version"].search(
                 [
                     ("module_id", "=", module_id),
-                    ("repository_branch_id", "=", repository_branch.id),
+                    ("repository_branch_id", "=", record.id),
                 ],
                 limit=1,
             )
             if not module_version:
-                self.env["vcp.odoo.module.version"].create(vals)
+                module_version = self.env["vcp.odoo.module.version"].create(vals)
             else:
                 module_version.write(vals)
+            for rule in self.odoo_module_rule_ids:
+                rule._process_rule(module_version)
 
     def _load_odoo_module_manifest(self, path):
         manifest = copy.deepcopy(_DEFAULT_MANIFEST)
@@ -91,6 +102,9 @@ class VcpRule(models.Model):
             "version": manifest.get(
                 "version", repository_branch.branch_id.name + ".0.0-dev"
             ),
+            "path": manifest_path[len(repository_branch.local_path) :].rsplit("/", 1)[
+                0
+            ],
             "license": manifest.get("license"),
             "summary": manifest.get("summary"),
             "website": manifest.get("website"),

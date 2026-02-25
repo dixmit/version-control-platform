@@ -33,6 +33,9 @@
                         <page name="summary" string="Summary">
                             <field name="summary" />
                         </page>
+                        <page string="Information" name="information">
+                            <field name="rule_information_ids" />
+                        </page>
                     </notebook>
                 </sheet>
             </form>

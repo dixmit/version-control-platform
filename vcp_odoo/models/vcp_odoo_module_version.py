@@ -7,8 +7,10 @@ from odoo import fields, models, tools
 class VcpOdooModuleVersion(models.Model):
     _name = "vcp.odoo.module.version"
     _description = "Odoo Module on an specific repository branch"
+    _inherit = ["vcp.rule.information.mixin"]
 
     name = fields.Char(required=True)
+    path = fields.Char(required=True)
     module_id = fields.Many2one(
         "vcp.odoo.module",
         required=True,
@@ -46,6 +48,9 @@ class VcpOdooModuleVersion(models.Model):
         "vcp.odoo.bin.package",
         string="Python Binaries",
     )
+
+    def _get_local_path(self):
+        return f"{self.repository_branch_id.local_path}/{self.path}"
 
 
 class VcpOdooLibPython(models.Model):
