@@ -57,6 +57,7 @@ class VcpPlatform(models.Model):
     def _update_github_repository(self, repo):
         vals = {
             "created_at": self._parse_github_date(repo.created_at),
+            "last_commit_date": self._parse_github_date(repo.pushed_at),
             "stargazers_count": repo.stargazers_count,
             "fork_count": repo.forks_count,
             "is_fork": repo.fork,
