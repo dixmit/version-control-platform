@@ -22,6 +22,7 @@ class VcpRepositoryBranch(models.Model):
     repository_id = fields.Many2one(
         "vcp.repository",
         required=True,
+        ondelete="cascade",
     )
     platform_id = fields.Many2one(
         related="repository_id.platform_id",
