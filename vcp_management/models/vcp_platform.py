@@ -63,6 +63,10 @@ class VcpPlatform(models.Model):
         help="If checked, all repositories will be fetched (sources and forks)."
         " Otherwise, only sources repositories will be fetched"
     )
+    fetch_repository_archived = fields.Boolean(
+        help="If checked, all repositories will be fetched (actives and archived)."
+        " Otherwise, only active repositories will be fetched"
+    )
     local_path = fields.Char(compute="_compute_local_path")
     rule_ids = fields.Many2many(
         "vcp.rule",
