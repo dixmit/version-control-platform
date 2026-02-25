@@ -20,6 +20,10 @@ class VcpRepository(models.Model):
     )
     created_at = fields.Datetime(readonly=True)
     stargazers_count = fields.Integer(readonly=True)
+    is_fork = fields.Boolean(
+        readonly=True,
+        help="Specify if the repo is a Source or a Fork repository",
+    )
     fork_count = fields.Integer(readonly=True)
     watchers_count = fields.Integer(readonly=True)
     from_date = fields.Datetime(readonly=True, required=True)
