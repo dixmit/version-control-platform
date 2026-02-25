@@ -40,6 +40,8 @@ class VcpPlatform(models.Model):
             self.image_1920 = base64.b64encode(response.content)
         repos = org.repositories()
         for repo in repos:
+            if repo.fork and not self.fetch_repository_fork:
+                continue
             self._update_github_repository(repo)
         self.last_update = fields.Datetime.now()
 
@@ -55,6 +57,7 @@ class VcpPlatform(models.Model):
             "created_at": self._parse_github_date(repo.created_at),
             "stargazers_count": repo.stargazers_count,
             "fork_count": repo.forks_count,
+            "is_fork": repo.fork,
             "watchers_count": repo.watchers_count,
             "description": repo.description,
         }
