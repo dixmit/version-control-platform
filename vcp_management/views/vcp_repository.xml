@@ -157,6 +157,13 @@
         </field>
     </record>
 
+    <record model="ir.actions.act_window" id="vcp_platform_2_repository_act_window">
+        <field name="name">Repositories</field>
+        <field name="res_model">vcp.repository</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[("platform_id", "=", active_id)]</field>
+    </record>
+
     <record model="ir.actions.act_window" id="vcp_repository_act_window">
         <field name="name">Repositories</field>
         <field name="path">vcp-repositories</field>

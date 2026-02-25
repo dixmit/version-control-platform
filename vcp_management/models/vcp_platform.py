@@ -57,6 +57,7 @@ class VcpPlatform(models.Model):
         "vcp.repository",
         inverse_name="platform_id",
     )
+    repository_count = fields.Integer(compute="_compute_repository_count", store=True)
     default_update_repository_information = fields.Boolean()
     information_update = fields.Boolean()
     fetch_repository_fork = fields.Boolean(
@@ -87,6 +88,11 @@ class VcpPlatform(models.Model):
         source_path = self._get_source_path()
         for record in self:
             record.local_path = f"{source_path}/{record.id}"
+
+    @api.depends("repository_ids")
+    def _compute_repository_count(self):
+        for record in self:
+            record.repository_count = len(record.repository_ids)
 
     def update_information(self):
         self.ensure_one()

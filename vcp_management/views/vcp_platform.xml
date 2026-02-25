@@ -15,7 +15,20 @@
                     />
                 </header>
                 <sheet>
-                    <div name="button_box" />
+                    <div name="button_box">
+                        <button
+                            class="oe_stat_button"
+                            icon="fa-folder"
+                            type="action"
+                            name="%(vcp_platform_2_repository_act_window)d"
+                        >
+                            <field
+                                name="repository_count"
+                                string="Repositories"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
                     <field
                         name="image_1920"
                         widget='image'
@@ -66,6 +79,7 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
+                <field name="repository_count" optional="show" />
             </list>
         </field>
     </record>
