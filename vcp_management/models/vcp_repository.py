@@ -19,6 +19,7 @@ class VcpRepository(models.Model):
         required=True,
     )
     created_at = fields.Datetime(readonly=True)
+    last_commit_date = fields.Datetime(readonly=True)
     stargazers_count = fields.Integer(readonly=True)
     is_fork = fields.Boolean(
         readonly=True,

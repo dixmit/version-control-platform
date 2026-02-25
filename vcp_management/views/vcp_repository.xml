@@ -67,6 +67,7 @@
                     <group>
                         <field name="name" />
                         <field name="description" />
+                        <field name="last_commit_date" />
                         <field name="is_fork" />
                         <field name="platform_id" />
                         <field name="information_update" />
@@ -123,6 +124,7 @@
                 <field name="name" />
                 <field name="description" />
                 <field name="platform_id" />
+                <field name="last_commit_date" optional="show" />
                 <field name="from_date" />
                 <field name="fork_count" />
             </list>
