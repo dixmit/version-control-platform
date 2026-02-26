@@ -20,6 +20,10 @@ class VcpRepository(models.Model):
     )
     created_at = fields.Datetime(readonly=True)
     last_commit_date = fields.Datetime(readonly=True)
+    fetch_branch_pattern = fields.Char(
+        help="Regular Expression. If set, only branches whose names are matching"
+        " the pattern will be fetched. You can define that value at platform level."
+    )
     stargazers_count = fields.Integer(readonly=True)
     is_fork = fields.Boolean(
         readonly=True,

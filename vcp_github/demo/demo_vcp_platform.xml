@@ -3,5 +3,6 @@
     <record id="vcp_platform_oca_github" model="vcp.platform">
         <field name="name">OCA</field>
         <field name="host_id" ref="vcp_github_host" />
+        <field name="fetch_repository_branch_pattern">^\d+\.\d+$</field>
     </record>
 </odoo>

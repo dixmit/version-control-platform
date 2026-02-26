@@ -1,6 +1,7 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import logging
+import re
 from datetime import datetime, timedelta
 
 import github3
@@ -25,6 +26,13 @@ class VcpRepository(models.Model):
             existing_branches = {b.branch_id.name: b for b in self.branch_ids}
             found_branches = self.env["vcp.repository.branch"]
             for branch in repo.branches():
+                branch_pattern = (
+                    self.fetch_branch_pattern
+                    or self.platform_id.fetch_repository_branch_pattern
+                    or False
+                )
+                if branch_pattern and not re.match(branch_pattern, branch.name):
+                    continue
                 if branch.name in existing_branches:
                     existing_branches[branch.name].sudo().write(
                         {"last_commit": branch.commit.sha}
