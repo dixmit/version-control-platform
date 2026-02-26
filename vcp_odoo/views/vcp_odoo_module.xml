@@ -40,6 +40,11 @@
         <field name="arch" type="xml">
             <list>
                 <field name="name" />
+                <field
+                    name="repository_branch_ids"
+                    widget="many2many_tags"
+                    context="{'display_only_branch_name': 1}"
+                />
                 <field name="version_count" />
             </list>
         </field>

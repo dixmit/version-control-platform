@@ -98,3 +98,10 @@ class VcpRepositoryBranch(models.Model):
                 depth=1,
             )
         return result
+
+    def _compute_display_name(self):
+        if not self._context.get("display_only_branch_name"):
+            return super()._compute_display_name()
+
+        for record in self:
+            record.display_name = record.branch_id.name
