@@ -20,6 +20,7 @@ class VcpPlatform(models.Model):
     """
 
     _name = "vcp.platform"
+    _inherit = ["image.mixin"]
     _description = "VCP Platform"
 
     name = fields.Char(required=True)
@@ -28,20 +29,9 @@ class VcpPlatform(models.Model):
     last_update = fields.Datetime(readonly=True)
     active = fields.Boolean(default=True)
     update_interval_days = fields.Integer(default=3)
-    image_1920 = fields.Image()
     branch_ids = fields.One2many(
         "vcp.branch",
         inverse_name="platform_id",
-    )
-    image_128 = fields.Image(
-        max_width=128,
-        max_height=128,
-        store=True,
-        related="image_1920",
-        string="Image 128",
-    )
-    image_64 = fields.Image(
-        max_width=64, max_height=64, store=True, related="image_1920", string="Image 64"
     )
     host_id = fields.Many2one(
         "vcp.host",
