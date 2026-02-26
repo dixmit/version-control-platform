@@ -126,6 +126,7 @@
                 <field name="platform_id" />
                 <field name="last_commit_date" optional="show" />
                 <field name="from_date" />
+                <field name="branch_count" optional="show" />
                 <field name="fork_count" />
             </list>
         </field>

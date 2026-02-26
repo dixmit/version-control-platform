@@ -51,6 +51,7 @@ class VcpRepository(models.Model):
         "vcp.repository.branch",
         inverse_name="repository_id",
     )
+    branch_count = fields.Integer(compute="_compute_branch_count", store=True)
 
     def _get_rules(self):
         rules = self.rule_ids
@@ -78,6 +79,11 @@ class VcpRepository(models.Model):
     def _compute_request_count(self):
         for record in self:
             record.request_count = len(record.request_ids)
+
+    @api.depends("branch_ids")
+    def _compute_branch_count(self):
+        for record in self:
+            record.branch_count = len(record.branch_ids)
 
     def update_branches(self):
         self.ensure_one()
