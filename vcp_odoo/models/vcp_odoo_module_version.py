@@ -7,7 +7,7 @@ from odoo import fields, models, tools
 class VcpOdooModuleVersion(models.Model):
     _name = "vcp.odoo.module.version"
     _description = "Odoo Module on an specific repository branch"
-    _inherit = ["vcp.rule.information.mixin"]
+    _inherit = ["vcp.rule.information.mixin", "image.mixin"]
 
     name = fields.Char(required=True)
     path = fields.Char(required=True)
@@ -27,19 +27,6 @@ class VcpOdooModuleVersion(models.Model):
     license = fields.Char(string="License (Manifest)", readonly=True)
     summary = fields.Char(string="Summary (Manifest)", readonly=True)
     website = fields.Char(string="Website (Manifest)", readonly=True)
-    image_1920 = fields.Image(
-        max_width=1920,
-        max_height=1920,
-        readonly=True,
-        string="Image 1920x1920 (Manifest)",
-    )
-    image_128 = fields.Image(
-        related="image_1920",
-        readonly=True,
-        max_width=128,
-        max_height=128,
-        string="Image 128x128 (Manifest)",
-    )
     lib_python_ids = fields.Many2many(
         "vcp.odoo.lib.python",
         string="Python Libraries",
