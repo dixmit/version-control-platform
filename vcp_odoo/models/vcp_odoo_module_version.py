@@ -19,6 +19,8 @@ class VcpOdooModuleVersion(models.Model):
     version = fields.Char(required=True)
     repository_branch_id = fields.Many2one(
         "vcp.repository.branch",
+        required=True,
+        ondelete="cascade",
     )
     depends_on_module_ids = fields.Many2many(
         "vcp.odoo.module",
