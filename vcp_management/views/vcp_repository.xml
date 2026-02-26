@@ -67,6 +67,7 @@
                     <group>
                         <field name="name" />
                         <field name="description" />
+                        <field name="fetch_branch_pattern" />
                         <field name="last_commit_date" />
                         <field name="is_fork" />
                         <field name="platform_id" />

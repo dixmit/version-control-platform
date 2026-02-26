@@ -58,6 +58,11 @@ class VcpPlatform(models.Model):
         help="If checked, all repositories will be fetched (actives and archived)."
         " Otherwise, only active repositories will be fetched"
     )
+    fetch_repository_branch_pattern = fields.Char(
+        help="Regular Expression. If set, only branches whose names are matching"
+        " the pattern will be fetched, when fetching branches of the repositories"
+        " of the platform."
+    )
     local_path = fields.Char(compute="_compute_local_path")
     rule_ids = fields.Many2many(
         "vcp.rule",
