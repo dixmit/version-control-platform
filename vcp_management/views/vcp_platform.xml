@@ -93,11 +93,4 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
-    <record model="ir.ui.menu" id="vcp_platform_menu">
-        <field name="name">Platforms</field>
-        <field name="parent_id" ref="vcp_main_menu" />
-        <field name="action" ref="vcp_platform_act_window" />
-        <field name="sequence" eval="1" />
-    </record>
 </odoo>

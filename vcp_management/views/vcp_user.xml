@@ -47,11 +47,4 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
-    <record model="ir.ui.menu" id="vcp_user_menu">
-        <field name="name">Users</field>
-        <field name="parent_id" ref="vcp_settings_menu" />
-        <field name="action" ref="vcp_user_act_window" />
-        <field name="sequence" eval="20" />
-    </record>
 </odoo>
