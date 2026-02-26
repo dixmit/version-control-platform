@@ -14,7 +14,6 @@
         "security/ir.model.access.csv",
         "data/ir_cron.xml",
         "templates/templates.xml",
-        "views/menu.xml",
         "views/vcp_comment.xml",
         "views/vcp_review.xml",
         "views/vcp_request.xml",
@@ -26,6 +25,7 @@
         "views/vcp_host.xml",
         "views/vcp_rule.xml",
         "views/vcp_rule_information.xml",
+        "views/menu.xml",
     ],
     "demo": [],
     "external_dependencies": {

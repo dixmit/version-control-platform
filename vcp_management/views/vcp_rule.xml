@@ -49,11 +49,4 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
-    <record model="ir.ui.menu" id="vcp_rule_menu">
-        <field name="name">Processing Rules</field>
-        <field name="parent_id" ref="vcp_settings_menu" />
-        <field name="action" ref="vcp_rule_act_window" />
-        <field name="sequence" eval="30" />
-    </record>
 </odoo>
