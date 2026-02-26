@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="vcp_platform_oca_github" model="vcp.platform">
+        <field name="name">OCA</field>
+        <field name="host_id" ref="vcp_github_host" />
+    </record>
+</odoo>
