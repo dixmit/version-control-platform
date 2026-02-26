@@ -17,5 +17,7 @@
     "data": [
         "data/data.xml",
     ],
-    "demo": [],
+    "demo": [
+        "demo/demo_vcp_platform.xml",
+    ],
 }
