@@ -15,6 +15,9 @@ class VcpOdooModule(models.Model):
         help="number of versions in which the module is available",
         store=True,
     )
+    repository_branch_ids = fields.Many2many(
+        "vcp.repository.branch", compute="_compute_repository_branch_ids"
+    )
 
     _sql_constraints = [
         ("name_uniq", "unique(name)", "The module name must be unique"),
@@ -24,6 +27,13 @@ class VcpOdooModule(models.Model):
     def _compute_version_count(self):
         for record in self:
             record.version_count = len(record.version_ids)
+
+    @api.depends("version_ids.repository_branch_id")
+    def _compute_repository_branch_ids(self):
+        for record in self:
+            record.repository_branch_ids = record.mapped(
+                "version_ids.repository_branch_id"
+            ).sorted(lambda x: x.branch_id.name)
 
     @tools.ormcache("name")
     def _get_odoo_module(self, name):
