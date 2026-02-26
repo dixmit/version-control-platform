@@ -50,7 +50,11 @@
                     </group>
                     <notebook>
                         <page string="Branches" name="branch">
-                            <field name="branch_ids" />
+                            <field name="branch_ids">
+                                <list editable="bottom">
+                                    <field name="name" />
+                                </list>
+                            </field>
                         </page>
                         <page string="API Keys" name="keys" groups="base.group_system">
                             <field name="key_ids">

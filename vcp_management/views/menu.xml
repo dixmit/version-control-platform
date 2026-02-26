@@ -29,6 +29,15 @@
             sequence="20"
         />
 
+        <menuitem id="vcp_technical_menu" name="Technical" sequence="70">
+            <menuitem
+                id="vcp_branch_menu"
+                name="Branches"
+                action="vcp_branch_act_window"
+                sequence="10"
+            />
+        </menuitem>
+
         <menuitem id="vcp_settings_menu" name="Settings" sequence="80">
             <menuitem
                 id="vcp_organization_menu"
