@@ -113,7 +113,7 @@ class VcpRepository(models.Model):
                     "id": str(c["id"]),
                     "user_id": c.get("user")
                     and self.platform_id.host_id._get_user(c["user"].get("login")),
-                    "body": c["body"],
+                    "body": self.platform_id._parse_github_markdown(c["body"]),
                     "created_at": self.platform_id._parse_github_date(c["created_at"]),
                     "updated_at": self.platform_id._parse_github_date(c["updated_at"]),
                 }
@@ -124,7 +124,7 @@ class VcpRepository(models.Model):
                     "id": str(r["id"]),
                     "user_id": r.get("user")
                     and self.platform_id.host_id._get_user(r["user"].get("login")),
-                    "body": r["body"],
+                    "body": self.platform_id._parse_github_markdown(r["body"]),
                     "submitted_at": self.platform_id._parse_github_date(
                         r.get("submitted_at")
                     ),

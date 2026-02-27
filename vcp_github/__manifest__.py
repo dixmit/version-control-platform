@@ -12,7 +12,7 @@
         "vcp_management",
     ],
     "external_dependencies": {
-        "python": ["github3.py"],
+        "python": ["github3.py", "markdown"],
     },
     "data": [
         "data/data.xml",

@@ -5,6 +5,7 @@ import base64
 from datetime import datetime
 
 import github3
+import markdown
 import requests
 from pytz import UTC
 
@@ -53,6 +54,9 @@ class VcpPlatform(models.Model):
         return UTC.normalize(
             datetime.fromisoformat(date.replace("Z", "+00:00"))
         ).replace(tzinfo=None)
+
+    def _parse_github_markdown(self, text):
+        return markdown.markdown(text)
 
     def _update_github_repository(self, repo):
         vals = {
