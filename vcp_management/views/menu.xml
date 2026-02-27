@@ -36,6 +36,12 @@
                 action="vcp_branch_act_window"
                 sequence="10"
             />
+            <menuitem
+                id="vcp_comment_menu"
+                name="Comments"
+                action="vcp_comment_act_window"
+                sequence="30"
+            />
         </menuitem>
 
         <menuitem id="vcp_settings_menu" name="Settings" sequence="80">
