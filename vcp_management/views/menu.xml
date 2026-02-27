@@ -42,6 +42,12 @@
                 action="vcp_comment_act_window"
                 sequence="30"
             />
+            <menuitem
+                id="vcp_review_menu"
+                name="Reviews"
+                action="vcp_review_act_window"
+                sequence="50"
+            />
         </menuitem>
 
         <menuitem id="vcp_settings_menu" name="Settings" sequence="80">
