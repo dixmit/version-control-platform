@@ -4,14 +4,14 @@
 from odoo import fields, models, tools
 
 
-class VcpOdooLibPython(models.Model):
-    _name = "vcp.odoo.lib.python"
+class VcpOdooPythonLibrary(models.Model):
+    _name = "vcp.odoo.python.library"
     _description = "Python Library required by an Odoo Module"
 
     name = fields.Char(required=True, readonly=True)
 
     @tools.ormcache("name")
-    def _get_lib_python(self, name):
+    def _get_python_library(self, name):
         lib = self.search([("name", "=", name)], limit=1)
         if not lib:
             lib = self.create({"name": name})

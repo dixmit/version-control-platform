@@ -5,5 +5,5 @@ access_vcp_odoo_module_version,Access Odoo Module Version,model_vcp_odoo_module_
 manage_vcp_odoo_module_version,Manage Odoo Module Version,model_vcp_odoo_module_version,vcp_management.group_vcp_manager,1,1,1,0
 access_vcp_odoo_bin_package,Access Odoo Bin Package,model_vcp_odoo_bin_package,vcp_management.group_vcp_user,1,0,0,0
 manage_vcp_odoo_bin_package,Manage Odoo Bin Package,model_vcp_odoo_bin_package,vcp_management.group_vcp_manager,1,1,1,0
-access_vcp_odoo_lib_python,Access Odoo Python Library,model_vcp_odoo_lib_python,vcp_management.group_vcp_user,1,0,0,0
-manage_vcp_odoo_lib_python,Manage Odoo Python Library,model_vcp_odoo_lib_python,vcp_management.group_vcp_manager,1,1,1,0
+access_vcp_odoo_python_library,Access Odoo Python Library,model_vcp_odoo_python_library,vcp_management.group_vcp_user,1,0,0,0
+manage_vcp_odoo_python_library,Manage Odoo Python Library,model_vcp_odoo_python_library,vcp_management.group_vcp_manager,1,1,1,0

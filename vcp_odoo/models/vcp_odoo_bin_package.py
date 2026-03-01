@@ -11,7 +11,7 @@ class VcpOdooBinPackage(models.Model):
     name = fields.Char(required=True, readonly=True)
 
     @tools.ormcache("name")
-    def _get_bin(self, name):
+    def _get_bin_package(self, name):
         bin_src = self.search([("name", "=", name)], limit=1)
         if not bin_src:
             bin_src = self.create({"name": name})

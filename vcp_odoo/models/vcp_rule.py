@@ -92,10 +92,14 @@ class VcpRule(models.Model):
                 break
         python_libs = []
         for lib in manifest.get("external_dependencies", {}).get("python", []):
-            python_libs.append(self.env["vcp.odoo.lib.python"]._get_lib_python(lib))
+            python_libs.append(
+                self.env["vcp.odoo.python.library"]._get_python_library(lib)
+            )
         package_bins = []
         for package_bin in manifest.get("external_dependencies", {}).get("bin", []):
-            package_bins.append(self.env["vcp.odoo.bin.package"]._get_bin(package_bin))
+            package_bins.append(
+                self.env["vcp.odoo.bin.package"]._get_bin_package(package_bin)
+            )
         return {
             "name": manifest.get("name"),
             "module_id": module_id,
@@ -112,6 +116,6 @@ class VcpRule(models.Model):
             "repository_branch_id": repository_branch.id,
             "depends_on_module_ids": [Command.set(depends)],
             "image_1920": icon,
-            "lib_python_ids": [Command.set(python_libs)],
+            "python_library_ids": [Command.set(python_libs)],
             "bin_package_ids": [Command.set(package_bins)],
         }
