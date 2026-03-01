@@ -48,6 +48,13 @@ class VcpRequest(models.Model):
         inverse_name="request_id",
     )
     review_count = fields.Integer(compute="_compute_review_count", store=True)
+    comment_ids = fields.One2many(
+        comodel_name="vcp.comment",
+        string="Comments",
+        readonly=True,
+        inverse_name="request_id",
+    )
+    comment_count = fields.Integer(compute="_compute_comment_count", store=True)
     url = fields.Char(readonly=True)
     state = fields.Char(readonly=True)
     is_merged = fields.Boolean(readonly=True)
@@ -74,3 +81,8 @@ class VcpRequest(models.Model):
     def _compute_review_count(self):
         for record in self:
             record.review_count = len(record.review_ids)
+
+    @api.depends("comment_ids")
+    def _compute_comment_count(self):
+        for record in self:
+            record.comment_count = len(record.comment_ids)
