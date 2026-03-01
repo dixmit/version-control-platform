@@ -8,7 +8,7 @@ class VcpOdooBinPackage(models.Model):
     _name = "vcp.odoo.bin.package"
     _description = "Binary Package required by an Odoo Module"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, readonly=True)
 
     @tools.ormcache("name")
     def _get_bin(self, name):

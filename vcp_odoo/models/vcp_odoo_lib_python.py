@@ -8,7 +8,7 @@ class VcpOdooLibPython(models.Model):
     _name = "vcp.odoo.lib.python"
     _description = "Python Library required by an Odoo Module"
 
-    name = fields.Char(required=True)
+    name = fields.Char(required=True, readonly=True)
 
     @tools.ormcache("name")
     def _get_lib_python(self, name):

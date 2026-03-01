@@ -8,8 +8,10 @@ class VcpOdooModule(models.Model):
     _name = "vcp.odoo.module"
     _description = "Odoo Module"
 
-    name = fields.Char(required=True)
-    version_ids = fields.One2many("vcp.odoo.module.version", inverse_name="module_id")
+    name = fields.Char(required=True, readonly=True)
+    version_ids = fields.One2many(
+        "vcp.odoo.module.version", inverse_name="module_id", readonly=True
+    )
     version_count = fields.Integer(
         compute="_compute_version_count",
         help="number of versions in which the module is available",
