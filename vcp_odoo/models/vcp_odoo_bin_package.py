@@ -10,6 +10,12 @@ class VcpOdooBinPackage(models.Model):
 
     name = fields.Char(required=True, readonly=True)
 
+    module_version_ids = fields.Many2many(
+        "vcp.odoo.module.version",
+        string="Odoo Module Versions",
+        readonly=True,
+    )
+
     @tools.ormcache("name")
     def _get_bin_package(self, name):
         bin_src = self.search([("name", "=", name)], limit=1)
