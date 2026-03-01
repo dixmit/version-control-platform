@@ -1,7 +1,7 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class VcpRequest(models.Model):
@@ -41,6 +41,13 @@ class VcpRequest(models.Model):
         related="organization_id.partner_id",
         string="Organization Partner",
     )
+    review_ids = fields.One2many(
+        comodel_name="vcp.review",
+        string="Reviews",
+        readonly=True,
+        inverse_name="request_id",
+    )
+    review_count = fields.Integer(compute="_compute_review_count", store=True)
     url = fields.Char(readonly=True)
     state = fields.Char(readonly=True)
     is_merged = fields.Boolean(readonly=True)
@@ -62,3 +69,8 @@ class VcpRequest(models.Model):
     _sql_constraints = [
         ("external_id_uniq", "unique(external_id)", "External ID must be unique.")
     ]
+
+    @api.depends("review_ids")
+    def _compute_review_count(self):
+        for record in self:
+            record.review_count = len(record.review_ids)
