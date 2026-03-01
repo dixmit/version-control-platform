@@ -48,6 +48,12 @@
                 action="vcp_review_act_window"
                 sequence="50"
             />
+            <menuitem
+                id="vcp_request_label_menu"
+                name="Request Labels"
+                action="vcp_request_label_act_window"
+                sequence="100"
+            />
         </menuitem>
 
         <menuitem id="vcp_settings_menu" name="Settings" sequence="80">

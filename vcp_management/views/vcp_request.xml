@@ -24,6 +24,11 @@
                     <field name="closed_at" invisible="1" />
                     <group>
                         <field name="external_id" />
+                        <field
+                            name="label_ids"
+                            widget="many2many_tags"
+                            options="{'color_field': 'color'}"
+                        />
                         <field name="url" widget="url" />
                         <field name="organization_id" />
                         <field name="repository_id" />
@@ -60,6 +65,11 @@
                 <field name="branch_id" />
                 <field name="number" />
                 <field name="name" />
+                <field
+                    name="label_ids"
+                    widget="many2many_tags"
+                    options="{'color_field': 'color'}"
+                />
                 <field name="url" widget="url" />
             </list>
         </field>

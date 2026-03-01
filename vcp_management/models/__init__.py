@@ -7,6 +7,7 @@ from . import vcp_rule_information_mixin
 from . import vcp_repository
 from . import vcp_repository_branch
 from . import vcp_request
+from . import vcp_request_label
 from . import vcp_review
 from . import vcp_comment
 from . import res_partner

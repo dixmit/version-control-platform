@@ -1,7 +1,7 @@
 # Copyright 2026 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models, tools
+from odoo import fields, models
 
 
 class VcpRequest(models.Model):
@@ -62,19 +62,3 @@ class VcpRequest(models.Model):
     _sql_constraints = [
         ("external_id_uniq", "unique(external_id)", "External ID must be unique.")
     ]
-
-
-class VcpRequestLabel(models.Model):
-    _name = "vcp.request.label"
-    _description = "Vcp Request Label"
-
-    name = fields.Char(required=True)
-
-    _sql_constraints = [("name_uniq", "unique(name)", "Label name must be unique.")]
-
-    @tools.ormcache("name")
-    def _get_label(self, name):
-        label = self.search([("name", "=", name)], limit=1)
-        if not label:
-            label = self.sudo().create({"name": name})
-        return label.id
