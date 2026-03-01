@@ -21,5 +21,21 @@
             action="vcp_odoo_module_version_act_window"
             sequence="20"
         />
+
+        <menuitem id="vcp_odoo_dependencies_menu" name="Dependencies" sequence="30">
+            <menuitem
+                id="vcp_odoo_bin_packages_menu"
+                name="Bin Packages"
+                action="vcp_odoo_bin_package_act_window"
+                sequence="10"
+            />
+
+            <menuitem
+                id="vcp_odoo_python_library_menu"
+                name="Python Librairies"
+                action="vcp_odoo_python_library_act_window"
+                sequence="20"
+            />
+        </menuitem>
     </menuitem>
 </odoo>

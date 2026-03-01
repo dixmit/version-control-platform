@@ -13,6 +13,8 @@
         "security/ir.model.access.csv",
         "views/vcp_odoo_module.xml",
         "views/vcp_odoo_module_version.xml",
+        "views/vcp_odoo_bin_package.xml",
+        "views/vcp_odoo_python_library.xml",
         "views/vcp_rule.xml",
         "views/menu.xml",
         "data/vcp_rule.xml",
