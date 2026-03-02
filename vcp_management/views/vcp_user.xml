@@ -42,6 +42,7 @@
 
     <record model="ir.actions.act_window" id="vcp_user_act_window">
         <field name="name">Users</field>
+        <field name="path">vcp-user</field>
         <field name="res_model">vcp.user</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[]</field>

@@ -39,6 +39,7 @@
 
     <record model="ir.actions.act_window" id="vcp_organization_act_window">
         <field name="name">Organizations</field>
+        <field name="path">vcp-organization</field>
         <field name="res_model">vcp.organization</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[]</field>

@@ -2,6 +2,14 @@
 <!-- Copyright 2026 Dixmit
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
+    <record model="ir.actions.act_window" id="vcp_platform_2_repository_act_window">
+        <field name="name">Repositories</field>
+        <field name="res_model">vcp.repository</field>
+        <field name="path">vcp-platform-to-repository</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[("platform_id", "=", active_id)]</field>
+    </record>
+
     <record model="ir.ui.view" id="vcp_platform_form_view">
         <field name="model">vcp.platform</field>
         <field name="arch" type="xml">
@@ -99,7 +107,7 @@
 
     <record model="ir.actions.act_window" id="vcp_platform_act_window">
         <field name="name">Platforms</field>
-        <field name="path">vcp-platforms</field>
+        <field name="path">vcp-platform</field>
         <field name="res_model">vcp.platform</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[]</field>

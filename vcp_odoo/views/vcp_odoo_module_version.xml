@@ -68,6 +68,7 @@
 
     <record model="ir.actions.act_window" id="vcp_odoo_module_version_act_window">
         <field name="name">Module Versions</field>
+        <field name="path">vcp-odoo-module-version</field>
         <field name="res_model">vcp.odoo.module.version</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[]</field>

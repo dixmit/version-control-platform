@@ -41,6 +41,7 @@
 
     <record model="ir.actions.act_window" id="vcp_odoo_bin_package_act_window">
         <field name="name">Bin Packages</field>
+        <field name="path">vcp-odoo-bin-package</field>
         <field name="res_model">vcp.odoo.bin.package</field>
         <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
