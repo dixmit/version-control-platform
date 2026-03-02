@@ -3,7 +3,8 @@
 
 from random import randint
 
-from odoo import fields, models, tools
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import UserError
 
 
 class VcpRequestLabel(models.Model):
@@ -13,6 +14,12 @@ class VcpRequestLabel(models.Model):
     name = fields.Char(required=True, readonly=True)
 
     color = fields.Char(default=lambda x: x._default_color())
+
+    request_ids = fields.Many2many(
+        comodel_name="vcp.request",
+        string="Requests",
+        readonly=True,
+    )
 
     _sql_constraints = [("name_uniq", "unique(name)", "Label name must be unique.")]
 
@@ -25,3 +32,13 @@ class VcpRequestLabel(models.Model):
         if not label:
             label = self.sudo().create({"name": name})
         return label.id
+
+    @api.ondelete(at_uninstall=False)
+    def _check_requests(self):
+        if self.mapped("request_ids"):
+            raise UserError(
+                _(
+                    "You can not delete labels that are related to Requests. "
+                    "You should first delete the related requests."
+                )
+            )
