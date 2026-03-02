@@ -56,7 +56,10 @@
                             name="scheduled_information_update"
                             widget="boolean_toggle"
                         />
-                        <field name="default_update_repository_information" />
+                        <field
+                            name="default_repository_scheduled_information_update"
+                            widget="boolean_toggle"
+                        />
                         <field name="rule_ids" widget="many2many_tags" />
                     </group>
                     <notebook>

@@ -48,7 +48,10 @@ class VcpPlatform(models.Model):
         inverse_name="platform_id",
     )
     repository_count = fields.Integer(compute="_compute_repository_count", store=True)
-    default_update_repository_information = fields.Boolean()
+    default_repository_scheduled_information_update = fields.Boolean(
+        help="If checked, the cron that update repositories"
+        " will look for up to date information, for this repository.",
+    )
     scheduled_information_update = fields.Boolean(
         default=True,
         help="If checked, the cron that update platform informations"

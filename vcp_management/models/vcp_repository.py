@@ -36,10 +36,13 @@ class VcpRepository(models.Model):
     request_count = fields.Integer(compute="_compute_request_count")
     test_field = fields.Char()  # TODO remove after testing
     active = fields.Boolean(default=True, readonly=True)
-    information_update = fields.Boolean(
-        compute="_compute_information_update",
+    scheduled_information_update = fields.Boolean(
+        compute="_compute_scheduled_information_update",
         store=True,
         readonly=False,
+        help="If checked, the cron that update repository informations"
+        " will look for up to date information, for this repository."
+        " This update include the recovery of requests, comments and reviews.",
     )
     branch_update = fields.Boolean(default=False)
     branch_update_date = fields.Datetime(
@@ -73,10 +76,10 @@ class VcpRepository(models.Model):
         return self.platform_id._get_git_url(self)
 
     @api.depends("platform_id")
-    def _compute_information_update(self):
+    def _compute_scheduled_information_update(self):
         for record in self:
-            record.information_update = (
-                record.platform_id.default_update_repository_information
+            record.scheduled_information_update = (
+                record.platform_id.default_repository_scheduled_information_update
             )
 
     @api.depends("request_ids")
@@ -104,9 +107,11 @@ class VcpRepository(models.Model):
             update_interval_days=update_interval_days
         )
 
-    def _cron_update_repositories(self, limit=1):
+    def _cron_update_repositories(self, limit):
         repositories = self.search(
-            [("information_update", "=", True)], limit=limit, order="from_date ASC"
+            [("scheduled_information_update", "=", True)],
+            limit=limit,
+            order="from_date ASC",
         )
         for repository in repositories:
             repository.update_information()

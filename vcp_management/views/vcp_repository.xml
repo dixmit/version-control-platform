@@ -80,7 +80,10 @@
                         <field name="last_commit_date" />
                         <field name="is_fork" />
                         <field name="platform_id" />
-                        <field name="information_update" />
+                        <field
+                            name="scheduled_information_update"
+                            widget="boolean_toggle"
+                        />
                         <field name="branch_update" />
                         <field name="rule_ids" widget="many2many_tags" />
                         <field name="override_parent_rules" />
@@ -138,6 +141,11 @@
                 <field name="from_date" />
                 <field name="branch_count" optional="show" />
                 <field name="fork_count" />
+                <field
+                    name="scheduled_information_update"
+                    widget="boolean_toggle"
+                    optional="hide"
+                />
             </list>
         </field>
     </record>
