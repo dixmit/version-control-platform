@@ -36,7 +36,7 @@ class TestVcpRules(TransactionCase):
             {"scheduled_information_update": False}
         )
         cls.env["vcp.repository"].search([]).write(
-            {"scheduled_information_update": False, "branch_update": False}
+            {"scheduled_information_update": False, "scheduled_branch_update": False}
         )
         # be sure some expected values are set otherwise homepage may fail
         cls.platform = cls.env["vcp.platform"].create(
@@ -71,7 +71,7 @@ class TestVcpRules(TransactionCase):
                 "name": "test_repo",
                 "description": "Test Repository",
                 "platform_id": self.platform.id,
-                "branch_update": True,
+                "scheduled_branch_update": True,
                 "from_date": Date.today(),
             }
         )
@@ -98,7 +98,7 @@ class TestVcpRules(TransactionCase):
                     "description": "Test Repository",
                     "platform_id": oself.id,
                     "scheduled_information_update": True,
-                    "branch_update": True,
+                    "scheduled_branch_update": True,
                     "from_date": Date.today(),
                 }
             )

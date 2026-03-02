@@ -84,7 +84,7 @@
                             name="scheduled_information_update"
                             widget="boolean_toggle"
                         />
-                        <field name="branch_update" />
+                        <field name="scheduled_branch_update" widget="boolean_toggle" />
                         <field name="rule_ids" widget="many2many_tags" />
                         <field name="override_parent_rules" />
                         <field name="from_date" />
@@ -143,6 +143,11 @@
                 <field name="fork_count" />
                 <field
                     name="scheduled_information_update"
+                    widget="boolean_toggle"
+                    optional="hide"
+                />
+                <field
+                    name="scheduled_branch_update"
                     widget="boolean_toggle"
                     optional="hide"
                 />

@@ -44,7 +44,13 @@ class VcpRepository(models.Model):
         " will look for up to date information, for this repository."
         " This update include the recovery of requests, comments and reviews.",
     )
-    branch_update = fields.Boolean(default=False)
+    scheduled_branch_update = fields.Boolean(
+        compute="_compute_scheduled_branch_update",
+        store=True,
+        readonly=False,
+        help="If checked, the cron that update repository branches"
+        " will look for up to date branches, for this repository.",
+    )
     branch_update_date = fields.Datetime(
         readonly=True, required=True, default=fields.Datetime.now
     )
@@ -82,6 +88,13 @@ class VcpRepository(models.Model):
                 record.platform_id.default_repository_scheduled_information_update
             )
 
+    @api.depends("platform_id")
+    def _compute_scheduled_branch_update(self):
+        for record in self:
+            record.scheduled_branch_update = (
+                record.platform_id.default_repository_scheduled_branch_update
+            )
+
     @api.depends("request_ids")
     def _compute_request_count(self):
         for record in self:
@@ -116,9 +129,11 @@ class VcpRepository(models.Model):
         for repository in repositories:
             repository.update_information()
 
-    def _cron_update_branches(self, limit=1):
+    def _cron_update_branches(self, limit):
         repositories = self.search(
-            [("branch_update", "=", True)], limit=limit, order="branch_update_date ASC"
+            [("scheduled_branch_update", "=", True)],
+            limit=limit,
+            order="branch_update_date ASC",
         )
         for repository in repositories:
             repository.update_branches()

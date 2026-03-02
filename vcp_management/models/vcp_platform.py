@@ -52,6 +52,10 @@ class VcpPlatform(models.Model):
         help="If checked, the cron that update repositories"
         " will look for up to date information, for this repository.",
     )
+    default_repository_scheduled_branch_update = fields.Boolean(
+        help="If checked, the cron that update repository branches"
+        " will look for up to date branches, for this repository.",
+    )
     scheduled_information_update = fields.Boolean(
         default=True,
         help="If checked, the cron that update platform informations"
