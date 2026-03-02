@@ -3,6 +3,13 @@
 
 from odoo import api, fields, models
 
+_STATUS_SELECTION = [
+    ("draft", "Draft"),
+    ("open", "Open"),
+    ("merged", "Merged"),
+    ("closed", "Closed"),
+]
+
 
 class VcpRequest(models.Model):
     """
@@ -57,7 +64,11 @@ class VcpRequest(models.Model):
     comment_count = fields.Integer(compute="_compute_comment_count", store=True)
     url = fields.Char(readonly=True)
     state = fields.Char(readonly=True)
+    status = fields.Selection(
+        selection=_STATUS_SELECTION, compute="_compute_status", store=True
+    )
     is_merged = fields.Boolean(readonly=True)
+    is_draft = fields.Boolean(readonly=True)
     created_at = fields.Datetime(readonly=True)
     updated_at = fields.Datetime(readonly=True)
     closed_at = fields.Datetime(readonly=True)
@@ -86,3 +97,15 @@ class VcpRequest(models.Model):
     def _compute_comment_count(self):
         for record in self:
             record.comment_count = len(record.comment_ids)
+
+    @api.depends("is_draft", "is_merged", "state")
+    def _compute_status(self):
+        for record in self:
+            if record.is_merged:
+                record.status = "merged"
+            elif record.closed_at:
+                record.status = "closed"
+            elif record.is_draft:
+                record.status = "draft"
+            else:
+                record.status = "open"

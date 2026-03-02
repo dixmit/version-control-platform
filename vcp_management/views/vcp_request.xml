@@ -50,16 +50,29 @@
                     </div>
                     <widget
                         name="web_ribbon"
+                        title="Draft"
+                        bg_color="bg-info"
+                        invisible="status != 'draft'"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="Open"
+                        bg_color="bg-primary"
+                        invisible="status != 'open'"
+                    />
+                    <widget
+                        name="web_ribbon"
                         title="Merged"
                         bg_color="bg-success"
-                        invisible="not is_merged"
+                        invisible="status != 'merged'"
                     />
                     <widget
                         name="web_ribbon"
                         title="Closed"
                         bg_color="bg-danger"
-                        invisible="is_merged or not closed_at"
+                        invisible="status != 'closed'"
                     />
+                    <field name="is_draft" invisible="1" />
                     <field name="is_merged" invisible="1" />
                     <field name="closed_at" invisible="1" />
                     <group>
@@ -110,9 +123,17 @@
                     widget="many2many_tags"
                     options="{'color_field': 'color'}"
                 />
-                <field name="url" widget="url" />
+                <field name="url" widget="url" optional="hide" />
                 <field name="comment_count" optional="hide" />
                 <field name="review_count" optional="hide" />
+                <field
+                    name="status"
+                    decoration-info="status == 'draft'"
+                    decoration-primary="status == 'open'"
+                    decoration-success="status == 'merged'"
+                    decoration-danger="status == 'closed'"
+                    widget="badge"
+                />
             </list>
         </field>
     </record>

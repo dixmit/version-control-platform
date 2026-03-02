@@ -85,6 +85,7 @@ class VcpRepository(models.Model):
                 "name": pr.title,
                 "is_merged": any(label["name"] == "merged 🎉" for label in pr.labels)
                 or pr.is_merged(),
+                "is_draft": pr.draft,
                 "created_at": self.platform_id._parse_github_date(
                     origin_data["created_at"]
                 ),
