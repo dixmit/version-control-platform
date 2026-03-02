@@ -26,12 +26,13 @@
                         <field name="auto_install" />
                         <field name="license" />
                         <field name="website" />
+                        <field name="summary" />
                         <field name="python_library_ids" widget="many2many_tags" />
                         <field name="bin_package_ids" widget="many2many_tags" />
                     </group>
                     <notebook>
-                        <page name="summary" string="Summary">
-                            <field name="summary" />
+                        <page name="description" string="Description">
+                            <field name="description" widget="html" />
                         </page>
                         <page string="Information" name="information">
                             <field name="rule_information_ids" />

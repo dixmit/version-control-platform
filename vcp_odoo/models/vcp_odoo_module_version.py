@@ -45,6 +45,7 @@ class VcpOdooModuleVersion(models.Model):
         string="Python Binaries",
         readonly=True,
     )
+    description = fields.Html(readonly=True)
 
     def _get_local_path(self):
         return f"{self.repository_branch_id.local_path}/{self.path}"
