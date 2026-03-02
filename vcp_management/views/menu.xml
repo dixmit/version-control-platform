@@ -37,6 +37,12 @@
                 sequence="10"
             />
             <menuitem
+                id="vcp_repository_branch_menu"
+                name="Repository Branches"
+                action="vcp_repository_branch_act_window"
+                sequence="20"
+            />
+            <menuitem
                 id="vcp_comment_menu"
                 name="Comments"
                 action="vcp_comment_act_window"

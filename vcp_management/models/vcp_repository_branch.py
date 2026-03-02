@@ -18,11 +18,13 @@ class VcpRepositoryBranch(models.Model):
         "vcp.branch",
         string="Branch",
         required=True,
+        readonly=True,
         ondelete="cascade",
     )
     repository_id = fields.Many2one(
         "vcp.repository",
         required=True,
+        readonly=True,
         ondelete="cascade",
     )
     platform_id = fields.Many2one(

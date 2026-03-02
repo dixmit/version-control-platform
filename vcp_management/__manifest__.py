@@ -19,6 +19,7 @@
         "views/vcp_request.xml",
         "views/vcp_request_label.xml",
         "views/vcp_repository.xml",
+        "views/vcp_repository_branch.xml",
         "views/vcp_branch.xml",
         "views/vcp_platform.xml",
         "views/vcp_organization.xml",

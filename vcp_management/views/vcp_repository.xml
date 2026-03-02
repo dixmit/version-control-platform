@@ -155,32 +155,6 @@
         </field>
     </record>
 
-    <record model="ir.ui.view" id="vcp_repository_branch_form_view">
-        <field name="model">vcp.repository.branch</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-                        <field name="repository_id" />
-                        <field
-                            name="branch_id"
-                            domain="[('platform_id', '=', platform_id)]"
-                        />
-                        <field name="rule_ids" widget="many2many_tags" />
-                        <field name="override_parent_rules" />
-                        <field name="platform_id" invisible="1" />
-                        <field name="last_commit" />
-                    </group>
-                    <notebook>
-                        <page string="Information" name="information">
-                            <field name="rule_information_ids" />
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
-        </field>
-    </record>
-
     <record model="ir.actions.act_window" id="vcp_repository_act_window">
         <field name="name">Repositories</field>
         <field name="path">vcp-repository</field>
