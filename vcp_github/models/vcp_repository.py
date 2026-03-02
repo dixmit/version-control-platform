@@ -56,6 +56,7 @@ class VcpRepository(models.Model):
             raise ValidationError(self.env._(f"Reset on {reset}")) from e
 
     def _parse_github_pr(self, pr, client):
+        self.ensure_one()
         origin_data = pr.as_dict()
         comments_url = pr.comments_url
         comments_req = client.session.get(comments_url)
@@ -71,12 +72,22 @@ class VcpRepository(models.Model):
             reviews_url = reviews_req.links["next"]["url"]
             reviews_req = client.session.get(reviews_url)
             reviews += reviews_req.json()
+
+        branch_pattern = (
+            self.fetch_branch_pattern
+            or self.platform_id.fetch_repository_branch_pattern
+            or False
+        )
+        if branch_pattern and not re.match(branch_pattern, pr.base.ref):
+            branch_id = False
+        else:
+            branch_id = self.platform_id._get_branch(pr.base.ref)
         return (
             str(pr.id),
             {
                 "user_id": self.platform_id.host_id._get_user(pr.user.login),
                 "repository_id": self.id,
-                "branch_id": self.platform_id._get_branch(pr.base.ref),
+                "branch_id": branch_id,
                 "organization_id": self.platform_id.host_id._get_organization(
                     pr.head.repo[0]
                 ),
