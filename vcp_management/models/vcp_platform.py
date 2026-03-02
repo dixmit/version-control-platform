@@ -49,7 +49,11 @@ class VcpPlatform(models.Model):
     )
     repository_count = fields.Integer(compute="_compute_repository_count", store=True)
     default_update_repository_information = fields.Boolean()
-    information_update = fields.Boolean()
+    scheduled_information_update = fields.Boolean(
+        default=True,
+        help="If checked, the cron that update platform informations"
+        " will look for up to date information, for this platform.",
+    )
     fetch_repository_fork = fields.Boolean(
         help="If checked, all repositories will be fetched (sources and forks)."
         " Otherwise, only sources repositories will be fetched"
@@ -98,7 +102,7 @@ class VcpPlatform(models.Model):
         return getattr(self, f"_get_git_url_{self.kind}")(repository)
 
     def _cron_update_platforms(self):
-        for platform in self.search([("information_update", "=", True)]):
+        for platform in self.search([("scheduled_information_update", "=", True)]):
             try:
                 platform.update_information()
             except Exception as e:

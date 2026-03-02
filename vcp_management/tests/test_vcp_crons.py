@@ -32,7 +32,9 @@ class TestVcpRules(TransactionCase):
             }
         )
         # disable updates to avoid unwanted side effects during tests
-        cls.env["vcp.platform"].search([]).write({"information_update": False})
+        cls.env["vcp.platform"].search([]).write(
+            {"scheduled_information_update": False}
+        )
         cls.env["vcp.repository"].search([]).write(
             {"information_update": False, "branch_update": False}
         )
@@ -43,7 +45,7 @@ class TestVcpRules(TransactionCase):
                 "short_description": "OCA",
                 "description": "OCA",
                 "host_id": cls.host.id,
-                "information_update": True,
+                "scheduled_information_update": True,
             }
         )
 
