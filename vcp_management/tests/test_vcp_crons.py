@@ -79,7 +79,7 @@ class TestVcpRules(TransactionCase):
             self.assertRaises(AttributeError),
             mute_logger("odoo.addons.vcp_management.models.vcp_platform"),
         ):
-            self.env["vcp.repository"]._cron_update_branches()
+            self.env["vcp.repository"]._cron_update_branches(limit=1)
 
     def test_platform_update_no_definition(self):
         with (
@@ -142,7 +142,7 @@ class TestVcpRules(TransactionCase):
             dummy_repository_update_information,
             create=True,
         ):
-            self.env["vcp.repository"]._cron_update_repositories()
+            self.env["vcp.repository"]._cron_update_repositories(limit=1)
         repository.invalidate_recordset()
         self.assertTrue(repository.request_ids)
         self.assertFalse(repository.branch_ids)
@@ -162,7 +162,7 @@ class TestVcpRules(TransactionCase):
             dummy_repository_update_branches,
             create=True,
         ):
-            self.env["vcp.repository"]._cron_update_branches()
+            self.env["vcp.repository"]._cron_update_branches(limit=1)
 
         self.assertTrue(repository.branch_ids)
         self.assertEqual(repository.branch_ids.branch_id.name, "main")
