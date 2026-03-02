@@ -33,7 +33,7 @@
         <field name="name">VCP: Branch Rule Process</field>
         <field name="model_id" ref="model_vcp_repository_branch" />
         <field name="state">code</field>
-        <field name="code">model._cron_process_branch_rules()</field>
+        <field name="code">model._cron_process_branch_rules(limit=10)</field>
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
         <field name="active">False</field>

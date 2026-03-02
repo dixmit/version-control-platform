@@ -40,7 +40,7 @@ class VcpRepositoryBranch(models.Model):
         required=True,
     )
 
-    def _cron_process_branch_rules(self, limit=10):
+    def _cron_process_branch_rules(self, limit):
         branches = self.search([], limit=limit, order="update_rule_processing_date asc")
         for branch in branches:
             branch.process_rules()
