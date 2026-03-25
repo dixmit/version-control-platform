@@ -55,6 +55,11 @@ class VcpOdooModuleVersion(models.Model):
         string="Author",
         readonly=True,
     )
+    maintainer_ids = fields.Many2many(
+        comodel_name="vcp.user",
+        string="Maintainer",
+        readonly=True,
+    )
 
     def _get_local_path(self):
         return f"{self.repository_branch_id.local_path}/{self.path}"

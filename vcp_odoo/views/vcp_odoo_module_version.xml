@@ -30,6 +30,7 @@
                         <field name="development_status" />
                         <field name="summary" />
                         <field name="author_ids" widget="many2many_tags" />
+                        <field name="maintainer_ids" widget="many2many_tags" />
                         <field name="python_library_ids" widget="many2many_tags" />
                         <field name="bin_package_ids" widget="many2many_tags" />
                     </group>
