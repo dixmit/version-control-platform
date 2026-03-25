@@ -8,6 +8,7 @@
             <form>
                 <header />
                 <sheet>
+                    <div class="oe_button_box" name="button_box" />
                     <field
                         name="image_1920"
                         widget="image"
