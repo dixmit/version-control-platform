@@ -35,6 +35,10 @@ class VcpOdooModuleVersion(models.Model):
     license = fields.Char(string="License (Manifest)", readonly=True)
     summary = fields.Char(string="Summary (Manifest)", readonly=True)
     website = fields.Char(string="Website (Manifest)", readonly=True)
+    development_status = fields.Char(
+        string="Development Status (Manifest)",
+        readonly=True,
+    )
     python_library_ids = fields.Many2many(
         "vcp.odoo.python.library",
         string="Python Libraries",

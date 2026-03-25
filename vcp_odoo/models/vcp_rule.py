@@ -124,6 +124,7 @@ class VcpRule(models.Model):
             "license": manifest.get("license"),
             "summary": manifest.get("summary"),
             "website": manifest.get("website"),
+            "development_status": manifest.get("development_status"),
             "auto_install": manifest.get("auto_install", False),
             "repository_branch_id": repository_branch.id,
             "depends_on_module_ids": [Command.set(depends)],
