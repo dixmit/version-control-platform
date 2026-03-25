@@ -106,6 +106,9 @@ class VcpRule(models.Model):
             package_bins.append(
                 self.env["vcp.odoo.bin.package"]._get_bin_package(package_bin)
             )
+        authors = []
+        for author in manifest.get("author").split(","):
+            authors.append(self.env["vcp.odoo.author"]._get_author(author.strip()))
         description = False
         for html_description_path in self._get_html_description_path():
             path = Path(os.path.dirname(manifest_path)) / html_description_path
@@ -115,6 +118,7 @@ class VcpRule(models.Model):
         return {
             "name": manifest.get("name"),
             "module_id": module_id,
+            "author_ids": [Command.set(authors)],
             "version": manifest.get(
                 "version", repository_branch.branch_id.name + ".0.0-dev"
             ),

@@ -50,6 +50,11 @@ class VcpOdooModuleVersion(models.Model):
         readonly=True,
     )
     description = fields.Html(readonly=True)
+    author_ids = fields.Many2many(
+        comodel_name="vcp.odoo.author",
+        string="Author",
+        readonly=True,
+    )
 
     def _get_local_path(self):
         return f"{self.repository_branch_id.local_path}/{self.path}"
