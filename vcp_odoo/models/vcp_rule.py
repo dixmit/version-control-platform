@@ -123,7 +123,7 @@ class VcpRule(models.Model):
                 description = path.read_text()
                 break
         return {
-            "name": manifest.get("name"),
+            "name": manifest.get("name").strip(),
             "module_id": module_id,
             "author_ids": [Command.set(authors)],
             "maintainer_ids": [Command.set(maintainers)],
